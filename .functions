@@ -1,0 +1,4 @@
+_xterm()
+{
+   \xterm -ls -fg white -bg black 2>/dev/null &
+}

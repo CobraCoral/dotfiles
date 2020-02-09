@@ -1,0 +1,1 @@
+xsetroot -mod 16 16 -fg '#343d46' -bg '#2b303b'
