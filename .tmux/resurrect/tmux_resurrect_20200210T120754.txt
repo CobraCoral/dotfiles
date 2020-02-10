@@ -1,0 +1,8 @@
+pane	Tmux	1	:bash	0	:MZ	0	:/home/fcavalcanti/work/source/tools	0	bash	:
+pane	Tmux	1	:bash	0	:MZ	1	:/home/fcavalcanti/work/source/LowLatencyUtils	1	bash	:
+pane	Tmux	2	:bash	0	:-	0	:/home/fcavalcanti/work/source/tools/benchmark	1	bash	:
+pane	Tmux	3	:bash	1	:*	0	:/home/fcavalcanti/work/source/tools	1	bash	:
+window	Tmux	1	0	:MZ	fca0,194x45,0,0[194x22,0,0,0,194x22,0,23,1]
+window	Tmux	2	0	:-	c2bf,194x45,0,0,2
+window	Tmux	3	1	:*	e193,194x45,0,0,24
+state	Tmux	

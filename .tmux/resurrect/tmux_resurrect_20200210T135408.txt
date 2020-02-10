@@ -1,0 +1,5 @@
+pane	default	1	:bash	1	:*	0	:/home/fcavalcanti/work/profile	1	bash	:
+pane	default	2	:bash	0	:#-	0	:/home/fcavalcanti/Downloads	1	bash	:
+window	default	1	1	:*	c79d,267x65,0,0,0
+window	default	2	0	:#-	c79e,267x65,0,0,1
+state	default	

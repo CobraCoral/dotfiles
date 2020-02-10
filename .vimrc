@@ -452,7 +452,7 @@ set incsearch
 set virtualedit=all
 set guifont=char
 " colorscheme icansee
-source ~/work/profile/.vim/icansee.vim
+source ~/work/dotfiles/.vim/icansee.vim
 
 " tab navigation like firefox
 :nmap <C-S-tab> :tabprevious<cr>
@@ -467,3 +467,25 @@ nmap <C-Insert> :tabnew<CR>
 nmap <C-Delete> :tabclose<CR>
 :nmap <C-PageUp> :tabnext<cr>
 :nmap <C-PageDown> :tabprev<cr>
+
+" FZF
+set rtp+=/home/linuxbrew/.linuxbrew/opt/fzf
+
+" Enable true color
+if exists('+termguicolors')
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+  set termguicolors
+endif
+
+" Plugins
+call plug#begin('~/.vim/bundle')
+Plug 'itchyny/lightline.vim'
+Plug 'sainnhe/artify.vim'
+Plug 'itchyny/vim-gitbranch'
+Plug 'macthecadillac/lightline-gitdiff'
+Plug 'maximbaz/lightline-ale'
+Plug 'albertomontesg/lightline-asyncrun'
+Plug 'rmolin88/pomodoro.vim'
+" Initialize plugin system
+call plug#end()
