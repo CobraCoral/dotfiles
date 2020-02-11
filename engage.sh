@@ -1,7 +1,6 @@
 #!/bin/bash
-#tmux new-session -d -n 'irc' 'ncdu'
 tmux new-session -d -n 'irc' 'mpg123 /mnt/INT2/strek/start.mp3 && weechat-curses'
-tmux rename-session Tmux
+tmux rename-session Tmux-Main
 tmux split-window -h   'newsbeuter'
 tmux selectp -t 1
 tmux split-window -v   'ocp-curses'
@@ -9,7 +8,6 @@ tmux selectp -t 2
 tmux split-window -v  'texnut '
 tmux selectp -t 0
 tmux split-window -v -p 25 '~/scripts/rainbow.sh'
-#tmux split-window -v -p 25 't stream timeline -C icon'
 tmux selectp -t 2
 tmux split-window -v -p 25 '~/stag3.sh'
 tmux split-window -h   'cava'
@@ -32,4 +30,4 @@ tmux split-window -v  -p 50 'vim /home/cirrus/scripts/cli.txt.pl'
 tmux selectp -t 2 
 tmux split-window -v  -p 35  'mutt'
 tmux selectw -t 1
-tmux -2 attach-session -t Tmux
+tmux -2 attach-session -t Tmux-Main

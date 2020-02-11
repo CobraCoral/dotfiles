@@ -1,0 +1,7 @@
+pane	0	1	:zsh	1	:*	0	:/home/fcavalcanti	1	zsh	:
+pane	Tmux-Main	1	:main	1	:*	0	:/home/fcavalcanti/work/dotfiles	1	zsh	:
+pane	Tmux-Main	1	:main	1	:*	1	:/home/fcavalcanti	0	htop	:htop
+pane	Tmux-Main	1	:main	1	:*	2	:/home/fcavalcanti	0	newsbeuter	:newsbeuter -r -u /home/fcavalcanti/work/reading/newsbeuter/urls -c /home/fcavalcanti/work/reading/newsbeuter/cache.db
+window	0	1	1	:*	b25d,80x24,0,0,0
+window	Tmux-Main	1	1	:*	78eb,267x65,0,0[267x50,0,0{156x50,0,0,13,110x50,157,0,35},267x14,0,51,34]
+state	Tmux-Main	
