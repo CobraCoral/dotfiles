@@ -1,4 +1,9 @@
 #----------------------------------------------------------------------------------
+# Setting up SHELL
+#----------------------------------------------------------------------------------
+SHELL=/usr/bin/zsh
+
+#----------------------------------------------------------------------------------
 # Setting up PATHs
 #----------------------------------------------------------------------------------
 export PATH=$PATH:~/work/sbin:~/work/bin
@@ -28,10 +33,10 @@ case $- in
    set -o emacs
 
    # source in all aliases
-   . ~/work/profile/.aliases
+   . ~/work/dotfiles/.aliases
 
    # source in all functions
-   . ~/work/profile/.functions
+   . ~/work/dotfiles/.functions
    ;;
 esac 
 #----------------------------------------------------------------------------------
@@ -52,26 +57,26 @@ HOST=`hostname`
 # or HOST=`uname -n`?
 USER=`whoami`
 HISTSIZE=200000
-HISTFILE=$HOME/work/profile/.sh_history
+HISTFILE=$HOME/work/dotfiles/.sh_history
 HISTFILESIZE=${HISTSIZE}0
 EDITOR=vim
 export TERM=xterm-256color
 
 # If set, the pattern "**" used in a pathname expansion context will
 # match all files and zero or more directories and subdirectories.
-shopt -s globstar
+#shopt -s globstar
 
 #----------------------------------------------------------------------------------
 # DISPLAY
 #----------------------------------------------------------------------------------
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
-shopt -s checkwinsize
+#shopt -s checkwinsize
 #----------------------------------------------------------------------------------
 
 #----------------------------------------------------------------------------------
 # TMUX
 #----------------------------------------------------------------------------------
-if [ -z "$TMUX" ]; then
-    tmux attach -t default || tmux new -s default
-fi
+#if [ -z "$TMUX" ]; then
+#    tmux attach -t default || tmux new -s default
+#fi

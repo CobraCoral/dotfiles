@@ -1,0 +1,8 @@
+pane	0	1	:zsh	1	:*	0	:/home/fcavalcanti	1	zsh	:
+pane	2	1	:zsh	0	:-	0	:/home/fcavalcanti/work/dotfiles	1	zsh	:
+pane	2	1	:zsh	0	:-	1	:/home/fcavalcanti/work	0	zsh	:
+pane	2	2	:[tmux]	1	:*	0	:/home/fcavalcanti/work/dotfiles/powerline	1	vi	:vi themes/tmux/fernando.json
+window	0	1	1	:*	b25d,80x24,0,0,0
+window	2	1	0	:-	4b1f,267x65,0,0[267x32,0,0,2,267x32,0,33,3]
+window	2	2	1	:*	c7a1,267x65,0,0,4
+state	2	

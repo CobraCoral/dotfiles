@@ -113,6 +113,11 @@ if has("gui_running")
     endif
     "colorscheme morning
 endif
+
+if !has('gui_running')
+  set t_Co=256
+endif
+
 " how many lines to sync backwards
 syn sync minlines=10000 maxlines=10000
 " how many lines to search backward after a jump to check syntax
@@ -440,19 +445,7 @@ inoremap <S-Del> <Del>
 noremap <S-Del> <Del>
 
 
-"unsorted
-"set foldclose=all
 set fdm=marker
-
-" Personalization
-set showmatch
-set guioptions-=T
-set vb t_vb=
-set incsearch
-set virtualedit=all
-set guifont=char
-" colorscheme icansee
-source ~/work/dotfiles/.vim/icansee.vim
 
 " tab navigation like firefox
 :nmap <C-S-tab> :tabprevious<cr>
@@ -487,5 +480,41 @@ Plug 'macthecadillac/lightline-gitdiff'
 Plug 'maximbaz/lightline-ale'
 Plug 'albertomontesg/lightline-asyncrun'
 Plug 'rmolin88/pomodoro.vim'
+Plug 'gruvbox-material/vim', {'as': 'gruvbox-material'}
+Plug 'sheerun/vim-polyglot'
+Plug 'itchyny/lightline.vim'
 " Initialize plugin system
 call plug#end()
+
+" Personalization
+set showmatch
+set guioptions-=T
+set vb t_vb=
+set incsearch
+set virtualedit=all
+set guifont=char
+" important!!
+set termguicolors
+
+" for dark version
+set background=dark
+
+" for light version
+"set background=light
+
+" set contrast
+" this configuration option should be placed before `colorscheme gruvbox-material`
+" available values: 'hard', 'medium'(default), 'soft'
+let g:gruvbox_material_background = 'hard'
+
+"" Airline
+"let g:airline_theme = 'gruvbox_material'
+
+" Lightline
+let g:lightline = {}
+let g:lightline.colorscheme = 'gruvbox_material'
+
+colorscheme gruvbox-material
+" colorscheme icansee
+"source ~/work/dotfiles/.vim/icansee.vim
+

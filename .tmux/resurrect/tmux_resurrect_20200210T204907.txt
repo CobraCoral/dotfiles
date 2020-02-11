@@ -1,0 +1,5 @@
+pane	0	1	:bash	1	:*	0	:/home/fcavalcanti	1	bash	:
+pane	4	1	:bash	1	:*	0	:/home/fcavalcanti	1	bash	:
+window	0	1	1	:*	b25d,80x24,0,0,0
+window	4	1	1	:*	c7a4,267x65,0,0,7
+state	4	
