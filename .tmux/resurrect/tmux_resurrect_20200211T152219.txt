@@ -1,0 +1,11 @@
+pane	0	1	:zsh	1	:*	0	:/home/fcavalcanti	1	zsh	:
+pane	Tmux-Main	1	:main	1	:*	0	:/home/fcavalcanti/work/source/LowLatencyUtils	0	telnet	:telnet towel.blinkenlights.nl
+pane	Tmux-Main	1	:main	1	:*	1	:/home/fcavalcanti/work/source/LowLatencyUtils	0	vi	:vi clock.cpp
+pane	Tmux-Main	1	:main	1	:*	2	:/home/fcavalcanti	1	zsh	:
+pane	Tmux-Main	1	:main	1	:*	3	:/home/fcavalcanti	0	zsh	:
+pane	Tmux-Main	1	:main	1	:*	4	:/home/fcavalcanti	0	zsh	:
+pane	Tmux-Main	1	:main	1	:*	5	:/home/fcavalcanti	0	cmatrix	:cmatrix
+pane	Tmux-Main	1	:main	1	:*	6	:/home/fcavalcanti	0	newsbeuter	:newsbeuter -r -u /home/fcavalcanti/work/reading/newsbeuter/urls -c /home/fcavalcanti/work/reading/newsbeuter/cache.db
+window	0	1	1	:*	b25d,80x24,0,0,0
+window	Tmux-Main	1	1	:*	f098,267x65,0,0[267x50,0,0{156x50,0,0[156x25,0,0,13,156x24,0,26{78x24,0,26,39,77x24,79,26,40}],110x50,157,0[110x42,157,0{66x42,157,0,35,43x42,224,0,37},110x7,157,43,36]},267x14,0,51,34]
+state	Tmux-Main	

@@ -1,0 +1,6 @@
+pane	0	1	:main	0	:#-	0	:/home/fcavalcanti/work/dotfiles	1	zsh	:
+pane	0	1	:main	0	:#-	1	:/home/fcavalcanti	0	newsbeuter	:newsbeuter -r -u /home/fcavalcanti/work/reading/newsbeuter/urls -c /home/fcavalcanti/work/reading/newsbeuter/cache.db
+pane	0	2	:weechat-curses	1	:*	0	:/home/fcavalcanti	1	weechat-curses	:weechat-curses
+window	0	1	0	:#-	859a,267x65,0,0[267x43,0,0,0,267x21,0,44,1]
+window	0	2	1	:*	c79f,267x65,0,0,2
+state	0	

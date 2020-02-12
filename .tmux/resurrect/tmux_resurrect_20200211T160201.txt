@@ -1,0 +1,4 @@
+pane	0	1	:main	1	:*	0	:/home/fcavalcanti/work/dotfiles	1	zsh	:
+pane	0	1	:main	1	:*	1	:/home/fcavalcanti	0	newsbeuter	:newsbeuter -r -u /home/fcavalcanti/work/reading/newsbeuter/urls -c /home/fcavalcanti/work/reading/newsbeuter/cache.db
+window	0	1	1	:*	859a,267x65,0,0[267x43,0,0,0,267x21,0,44,1]
+state	0	

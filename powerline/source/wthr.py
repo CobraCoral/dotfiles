@@ -2,6 +2,7 @@
 from __future__ import (unicode_literals, division, absolute_import, print_function)
 
 import json
+import time
 
 from powerline.lib.url import urllib_read, urllib_urlencode
 from powerline.lib.threaded import KwThreadedSegment
@@ -49,6 +50,7 @@ weather_conditions_codes = {
 	'partly_cloudy_night':     'cloudy',
 	'partly_cloudy_day':       'cloudy',
 	'clear_night':             'night' ,
+	'clear_day':               'day' ,
 	'sun':                     'sunny' ,
 	'fair_night':              'night' ,
 	'fair_day':                'day'   ,
@@ -147,23 +149,22 @@ class WeatherSegment(KwThreadedSegment):
 		response = json.loads(raw_response)
 		try:
                         condition = response['main']
-			condition_code = str(response['weather'][0]['main']).lower()
 			temp = float(str(condition['temp']))
                         sunrise = int(str(response['sys']['sunrise']))
                         sunset = int(str(response['sys']['sunset']))
+			condition_code = str(response['weather'][0]['main']).lower()
+                        if condition_code == 'clear':
+                            if (time.time() > sunrise and time.time() < sunset):
+                                condition_code = 'clear_day'
+                            else:
+                                condition_code = 'clear_night'
 		except (KeyError, ValueError):
 			self.exception('Weather query returned malformed or unexpected response: {0}', repr(raw_response))
 			return None
 
 		try:
                         condition_from_code = weather_conditions_codes[condition_code].lower()
-                        if condition_from_code == 'clear':
-                            if (time.time() > sunrise and time.time() < sunset):
-                                icon_names = (weather_condition_codes['fair_day'],)
-                            else:
-                                icon_names = (weather_condition_codes['fair_night'],)
-                        else:
-			    icon_names = (condition_from_code,)
+			icon_names = (condition_from_code,)
 		except IndexError:
 			if condition_code == 3200:
 				icon_names = ('not_available',)

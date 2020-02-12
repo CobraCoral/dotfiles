@@ -1,0 +1,10 @@
+pane	Tmux-Main	1	:main	1	:*	0	:/home/fcavalcanti/work/source/LowLatencyUtils	1	zsh	:
+pane	Tmux-Main	1	:main	1	:*	1	:/home/fcavalcanti	0	zsh	:
+pane	Tmux-Main	1	:main	1	:*	2	:/home/fcavalcanti	0	cmatrix	:cmatrix
+pane	Tmux-Main	1	:main	1	:*	3	:/home/fcavalcanti	0	newsbeuter	:newsbeuter -r -u /home/fcavalcanti/work/reading/newsbeuter/urls -c /home/fcavalcanti/work/reading/newsbeuter/cache.db
+pane	Tmux-Main	2	:zsh	0	:-	0	:/home/fcavalcanti	1	zsh	:
+pane	Tmux-Main	3	:zsh	0	:	0	:/home/fcavalcanti	1	zsh	:
+window	Tmux-Main	1	1	:*	2dd0,267x65,0,0[267x42,0,0{156x42,0,0,39,110x42,157,0[110x34,157,0,37,110x7,157,35,36]},267x22,0,43,34]
+window	Tmux-Main	2	0	:-	e402,267x65,0,0,42
+window	Tmux-Main	3	0	:	e403,267x65,0,0,43
+state	Tmux-Main	
