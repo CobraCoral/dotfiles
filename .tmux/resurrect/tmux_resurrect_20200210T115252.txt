@@ -1,6 +1,0 @@
-pane	0	1	:bash	0	:-MZ	0	:/home/fcavalcanti/work/source/tools	0	bash	:
-pane	0	1	:bash	0	:-MZ	1	:/home/fcavalcanti/work/source/LowLatencyUtils	1	bash	:
-pane	0	2	:newsbeuter	1	:*	0	:/home/fcavalcanti/work/source/tools/benchmark	1	newsbeuter	:newsbeuter -r -u /home/fcavalcanti/work/reading/newsbeuter/urls -c /home/fcavalcanti/work/reading/newsbeuter/cache.db
-window	0	1	0	:-MZ	fca0,194x45,0,0[194x22,0,0,0,194x22,0,23,1]
-window	0	2	1	:*	c2bf,194x45,0,0,2
-state	0	

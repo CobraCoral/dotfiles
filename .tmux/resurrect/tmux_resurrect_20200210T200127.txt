@@ -1,8 +1,0 @@
-pane	0	1	:bash	1	:*	0	:/home/fcavalcanti	1	bash	:
-pane	1	1	:bash	0	:-Z	0	:/home/fcavalcanti	0	bash	:
-pane	1	1	:bash	0	:-Z	1	:/home/fcavalcanti/work/dotfiles	1	bash	:
-pane	1	2	:bash	1	:*M	0	:/home/fcavalcanti/Downloads/i3blocks	1	bash	:
-window	0	1	1	:*	b25d,80x24,0,0,0
-window	1	1	0	:-Z	cb1c,267x65,0,0[267x32,0,0,1,267x32,0,33,2]
-window	1	2	1	:*M	c7a0,267x65,0,0,3
-state	1	

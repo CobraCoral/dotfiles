@@ -1,5 +1,0 @@
-pane	0	1	:bash	1	:*	0	:/home/fcavalcanti	1	bash	:
-pane	12	1	:bash	1	:*	0	:/home/fcavalcanti/work/dotfiles	1	bash	:
-window	0	1	1	:*	b25d,80x24,0,0,0
-window	12	1	1	:*	6408,267x65,0,0,19
-state	12	

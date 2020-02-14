@@ -1,1 +1,0 @@
-/home/fcavalcanti/work/dotfiles/.vimrc
