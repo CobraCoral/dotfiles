@@ -305,8 +305,11 @@ endif
 " -----------------------------------------------------------
 
 if has("unix")
+  if !has("nvim")
     set clipboard=autoselect
-    set shell=/bin/bash
+  else
+  endif
+    set shell=/bin/zsh
 endif
 
 " -----------------------------------------------------------

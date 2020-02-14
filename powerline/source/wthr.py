@@ -77,16 +77,16 @@ weather_conditions_codes = {
 # ('sunny',  (32, 36)),
 # ('night',  (31, 33))):
 weather_conditions_icons = {
-	'day':           'DAY',
-	'blustery':      'WIND',
-	'rainy':         'RAIN',
-	'cloudy':        'CLOUDS',
-	'snowy':         'SNOW',
-	'stormy':        'STORM',
-	'foggy':         'FOG',
-	'sunny':         'SUN',
-	'night':         'NIGHT',
-	'windy':         'WINDY',
+	'day':           '☼', #'DAY',
+	'blustery':      '🌬', #'WIND',
+	'rainy':         '🌧', #'RAIN',
+	'cloudy':        '🌥', #'CLOUDS',
+	'snowy':         '⛄', #'SNOW',
+	'stormy':        '⛈', #'STORM',
+	'foggy':         '🌫', #'FOG',
+	'sunny':         '🌤', #'SUN',
+	'night':         '🌃', #'NIGHT',
+	'windy':         '🌬', #'WINDY',
 	'not_available': 'NA',
 	'unknown':       'UKN',
 }
@@ -126,7 +126,9 @@ class WeatherSegment(KwThreadedSegment):
                            print(json.dumps(response, indent=2))
                         """
 			if location_query is None:
-                                location_data = json.loads(urllib_read('http://api.ipapi.com/70.126.90.220?access_key=7e6e7ae0d7e7b79d05bf3a002eb327cc'))
+                                #location_data = json.loads(urllib_read('http://api.ipapi.com/70.126.90.220?access_key=7e6e7ae0d7e7b79d05bf3a002eb327cc'))
+                                location_data = {'ip': '70.126.90.220', 'type': 'ipv4', 'continent_code': 'NA', 'continent_name': 'North America', 'country_code': 'US', 'country_name': 'United States', 'region_code': 'FL', 'region_name': 'Florida', 'city': 'Clearwater', 'zip': '33765', 'latitude': 27.975709915161133, 'longitude': -82.7464599609375, 'location': {'geoname_id': 4151316, 'capital': 'Washington D.C.', 'languages': [{'code': 'en', 'name': 'English', 'native': 'English'}], 'country_flag': 'http://assets.ipapi.com/flags/us.svg', 'country_flag_emoji': '🇺🇸', 'country_flag_emoji_unicode': 'U+1F1FA U+1F1F8', 'calling_code': '1', 'is_eu': False}}
+
 				location = ','.join((
 					location_data['city'],
 					location_data['country_code']
@@ -141,7 +143,7 @@ class WeatherSegment(KwThreadedSegment):
 
 	def compute_state(self, location_query):
 		url = self.get_request_url(location_query)
-                print("+"*80, url)
+                #print("+"*80, url)
 		raw_response = urllib_read(url)
 		if not raw_response:
 			self.error('Failed to get response')
@@ -150,6 +152,7 @@ class WeatherSegment(KwThreadedSegment):
 		try:
                         condition = response['main']
 			temp = float(str(condition['temp']))
+			feels_like = float(str(condition['feels_like']))
                         sunrise = int(str(response['sys']['sunrise']))
                         sunset = int(str(response['sys']['sunset']))
 			condition_code = str(response['weather'][0]['main']).lower()
@@ -173,24 +176,26 @@ class WeatherSegment(KwThreadedSegment):
 				icon_names = ('unknown',)
 				self.error('Unknown condition code: {0}', condition_code)
 
-		return (temp, icon_names)
+		return (temp, feels_like, icon_names)
 
 	def render_one(self, weather, icons=None, unit='C', temp_format=None, temp_coldest=-30, temp_hottest=40, **kwargs):
 		if not weather:
 			return None
 
-		temp, icon_names = weather
+		temp, feels_like, icon_names = weather
 
 		for icon_name in icon_names:
-			if icons:
-				if icon_name in icons:
-					icon = icons[icon_name]
-					break
+		  if icons:
+		    if icon_name in icons:
+		      icon = icons[icon_name]
+		      break
 		else:
-			icon = weather_conditions_icons[icon_names[-1]]
+		  icon = weather_conditions_icons[icon_names[-1]]
+		icon = '%s %s '%(icon, weather_conditions_icons[icon_names[-1]])
 
 		temp_format = temp_format or ('{temp:.0f}' + temp_units[unit])
 		converted_temp = temp_conversions[unit](temp)
+		converted_feels_like = temp_conversions[unit](feels_like)
 		if temp <= temp_coldest:
 			gradient_level = 0
 		elif temp >= temp_hottest:
@@ -205,13 +210,12 @@ class WeatherSegment(KwThreadedSegment):
 				'divider_highlight_group': 'background:divider',
 			},
 			{
-				'contents': temp_format.format(temp=converted_temp),
+				'contents': '%s (%s)'%(temp_format.format(temp=converted_temp),temp_format.format(temp=converted_feels_like)),
 				'highlight_groups': ['weather_temp_gradient', 'weather_temp', 'weather'],
 				'divider_highlight_group': 'background:divider',
 				'gradient_level': gradient_level,
 			},
 		]
-
 
 weather = with_docstring(WeatherSegment(),
 '''Return weather from Yahoo! Weather.

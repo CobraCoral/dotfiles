@@ -7,3 +7,6 @@ alias qfc='grep -nrsiI --include="*.c" --include="*.cpp" --include="*.h" --inclu
 alias xterm=_xterm
 alias tmux='tmux -f ~/work/dotfiles/.tmux.conf'
 alias news='newsbeuter -r -u ~/work/reading/newsbeuter/urls -c ~/work/reading/newsbeuter/cache.db'
+if type nvim > /dev/null 2>&1; then
+  alias vim='nvim'
+fi
