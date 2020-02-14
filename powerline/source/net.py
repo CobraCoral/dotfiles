@@ -34,7 +34,7 @@ def hostname(pl, segment_info, only_if_ssh=False, exclude_domain=False):
         retval = socket.gethostname().split('.')[0]
     else:
         retval = socket.gethostname()
-    return '🥋 %s ☠'%(retval)
+    return '%s ☠'%(retval)
 
 def _external_ip(query_url='http://ipv4.icanhazip.com/'):
     return urllib_read(query_url).strip()
