@@ -85,6 +85,10 @@ zsh-autosuggestions
 fzf
 fzf-zsh
 httpie
+jsontools
+pip
+rand-quote
+web-search
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -117,3 +121,11 @@ source $ZSH/oh-my-zsh.sh
 . ~/work/dotfiles/.environment
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# Generate some random quote
+q=$(( $RANDOM % 2 ))
+if [[ $q -eq 0 ]]; then
+    quote
+else
+    fortune
+fi
