@@ -7,7 +7,7 @@ SHELL=/usr/bin/zsh
 # Setting up PATHs
 #----------------------------------------------------------------------------------
 export PATH=$PATH:~/work/sbin:~/work/bin
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:~/work/sbin:~/work/bin:~/work/lib
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:~/work/sbin:~/work/bin:~/work/lib:~/work/sbin/cyberghost
 export MANPATH=$MANPATH:~/work/man
 
 # Homebrew/Linuxbrew

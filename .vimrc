@@ -25,13 +25,13 @@ set ai
 " smartindenting (clever autoindenting)
 set si
 " number of spaces the tab stands for
-set tabstop=2
+set tabstop=4
 " number of spaces used for (auto)indenting
-set shiftwidth=2
+set shiftwidth=4
 " a <tab> in an indent insets 'shiftwidth' spaces (not tabstop)
 set smarttab
 " if non-zero, number of spaces to insert for a <tab>
-set softtabstop=2
+set softtabstop=4
 " enable specific indenting for c-code and others
 set cindent
 " and here some nice options for cindenting
@@ -486,8 +486,16 @@ Plug 'rmolin88/pomodoro.vim'
 Plug 'gruvbox-material/vim', {'as': 'gruvbox-material'}
 Plug 'sheerun/vim-polyglot'
 Plug 'itchyny/lightline.vim'
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  Plug 'zchee/deoplete-jedi', { 'for': 'python' }
+  Plug 'Shougo/neco-vim', { 'for': 'vim' }
+endif
 " Initialize plugin system
 call plug#end()
+
+" deoplete
+let g:deoplete#enable_at_startup = 1
 
 " Personalization
 set showmatch
