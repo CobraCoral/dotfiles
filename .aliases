@@ -10,3 +10,4 @@ alias news='newsbeuter -r -u ~/work/reading/newsbeuter/urls -c ~/work/reading/ne
 if type nvim > /dev/null 2>&1; then
   alias vim='nvim'
 fi
+alias lsmem='ps aux --sort=-%mem | awk "NR<=20{print \$0}" '

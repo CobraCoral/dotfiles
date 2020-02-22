@@ -125,7 +125,9 @@ source $ZSH/oh-my-zsh.sh
 # Generate some random quote
 q=$(( $RANDOM % 2 ))
 if [[ $q -eq 0 ]]; then
-    quote
+    quote | cowsay -f `cowsay -l | grep -v \/ | tr " " "\n" | shuf -n1`
 else
-    fortune
+    #fortune | cowsay -f `ls /usr/share/cowsay/cows | awk '{ print $NF }' | sort -R | tail -1 | cut -d. -f1`
+    #fortune | cowsay -f `cowsay -l | grep -v \/ | tr " " "\n" | sort -R | tail -1`
+    fortune | cowsay -f `cowsay -l | grep -v \/ | tr " " "\n" | shuf -n1`
 fi
