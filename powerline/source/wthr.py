@@ -119,16 +119,15 @@ class WeatherSegment(KwThreadedSegment):
             return self.location_urls[location_query]
         except KeyError:
             """
-               ld = json.loads(urllib_read('http://ipinfo.io'))
-               wthr = json.loads(urllib_read('http://api.openweathermap.org/data/2.5/weather?q={city},{country}&APPID=fdb4fd817c68a23bee0c9a015d73704f'.format(**ld)))
                ld2 = json.loads(urllib_read('http://api.ipapi.com/70.126.90.220?access_key=7e6e7ae0d7e7b79d05bf3a002eb327cc'))
                wthr = json.loads(urllib_read('http://api.openweathermap.org/data/2.5/weather?q={city},{region_code},{country_code}&APPID=fdb4fd817c68a23bee0c9a015d73704f'.format(**ld2)))
                print(json.dumps(response, indent=2))
             """
             if location_query is None:
-                #location_data = json.loads(urllib_read('http://geoip.nekudo.com/api/'))
                 #location_data = json.loads(urllib_read('http://api.ipapi.com/70.126.90.220?access_key=7e6e7ae0d7e7b79d05bf3a002eb327cc'))
-                location_data = {'ip': '70.126.90.220', 'type': 'ipv4', 'continent_code': 'NA', 'continent_name': 'North America', 'country_code': 'US', 'country_name': 'United States', 'region_code': 'FL', 'region_name': 'Florida', 'city': 'Clearwater', 'zip': '33765', 'latitude': 27.975709915161133, 'longitude': -82.7464599609375, 'location': {'geoname_id': 4151316, 'capital': 'Washington D.C.', 'languages': [{'code': 'en', 'name': 'English', 'native': 'English'}], 'country_flag': 'http://assets.ipapi.com/flags/us.svg', 'country_flag_emoji': '🇺🇸', 'country_flag_emoji_unicode': 'U+1F1FA U+1F1F8', 'calling_code': '1', 'is_eu': False}}
+                #location_data = {'ip': '70.126.90.220', 'type': 'ipv4', 'continent_code': 'NA', 'continent_name': 'North America', 'country_code': 'US', 'country_name': 'United States', 'region_code': 'FL', 'region_name': 'Florida', 'city': 'Clearwater', 'zip': '33765', 'latitude': 27.975709915161133, 'longitude': -82.7464599609375, 'location': {'geoname_id': 4151316, 'capital': 'Washington D.C.', 'languages': [{'code': 'en', 'name': 'English', 'native': 'English'}], 'country_flag': 'http://assets.ipapi.com/flags/us.svg', 'country_flag_emoji': '🇺🇸', 'country_flag_emoji_unicode': 'U+1F1FA U+1F1F8', 'calling_code': '1', 'is_eu': False}}
+                #location_data = json.loads(urllib_read('http://api.ipapi.com/96.246.22.60?access_key=7e6e7ae0d7e7b79d05bf3a002eb327cc'))
+                location_data = {'ip': '96.246.22.60', 'type': 'ipv4', 'continent_code': 'NA', 'continent_name': 'North America', 'country_code': 'US', 'country_name': 'United States', 'region_code': 'NY', 'region_name': 'New York', 'city': 'Brooklyn', 'zip': '11226', 'latitude': 40.645408630371094, 'longitude': -73.95873260498047, 'location': {'geoname_id': 5110302, 'capital': 'Washington D.C.', 'languages': [{'code': 'en', 'name': 'English', 'native': 'English'}], 'country_flag': 'http://assets.ipapi.com/flags/us.svg', 'country_flag_emoji': '🇺🇸', 'country_flag_emoji_unicode': 'U+1F1FA U+1F1F8', 'calling_code': '1', 'is_eu': False}}
                 location = ','.join((
                 	location_data['city'],
                 	location_data['country_code']

@@ -496,6 +496,8 @@ call plug#end()
 
 " deoplete
 let g:deoplete#enable_at_startup = 1
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
 " Personalization
 set showmatch
@@ -529,3 +531,6 @@ colorscheme gruvbox-material
 " colorscheme icansee
 "source ~/work/dotfiles/.vim/icansee.vim
 
+if has('nvim')
+    set path+=**
+endif

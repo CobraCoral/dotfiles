@@ -31,6 +31,7 @@ You should not be asked for a username or password. If it works, your SSH key is
 Example:
 ```
 $ git init
+$ git remote add origin git@github.com:CobraCoral/opencv_fun.git
 $ git remote add origin https://github.com/CobraCoral/dotfiles.git
 $ git remote add upstream https://github.com/CobraCoral/dotfiles.git
 $ git remote set-url origin git@github.com:cobracoral/dotfiles.git
