@@ -6,7 +6,7 @@ import json, time, datetime, calendar, functools
 
 def getStudyValue(*args, **kwargs):
     #print(args, kwargs)
-    with open('/home/fcavalcanti/work/documents/studyschedule.json') as f:
+    with open('/home/fcavalcanti/work/dotfiles/powerline/mysegments/studyschedule.json') as f:
         data = json.load(f)
     
     for weekday, times in data['days'].items():
