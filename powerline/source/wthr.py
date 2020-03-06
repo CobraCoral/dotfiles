@@ -37,6 +37,7 @@ weather_conditions_codes = {
     'snow':                    'snowy' ,
     'hail':                    'snowy' ,
     'sleet':                   'snowy' ,
+    'mist':                    'foggy' ,
     'dust':                    'foggy' ,
     'fog':                     'foggy' ,
     'haze':                    'foggy' ,

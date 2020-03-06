@@ -6,7 +6,7 @@ SHELL=/usr/bin/zsh
 #----------------------------------------------------------------------------------
 # Setting up PATHs
 #----------------------------------------------------------------------------------
-export PATH=$PATH:~/work/sbin:~/work/bin
+export PATH=$PATH:~/work/sbin:~/work/bin:~/.local/bin
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:~/work/sbin:~/work/bin:~/work/lib:~/work/sbin/cyberghost
 export MANPATH=$MANPATH:~/work/man
 
@@ -60,7 +60,15 @@ HISTSIZE=200000
 HISTFILE=$HOME/work/dotfiles/.sh_history
 HISTFILESIZE=${HISTSIZE}0
 EDITOR=vim
-export TERM=xterm-256color
+#----------------------------------------------------------------------------------
+# TMUX
+#----------------------------------------------------------------------------------
+if [ -z "$TMUX" ]; then
+    #tmux attach -t default || tmux new -s default
+    export TERM=xterm-256color
+else
+    export TERM=screen-256color
+fi
 
 # If set, the pattern "**" used in a pathname expansion context will
 # match all files and zero or more directories and subdirectories.
@@ -74,9 +82,3 @@ export TERM=xterm-256color
 #shopt -s checkwinsize
 #----------------------------------------------------------------------------------
 
-#----------------------------------------------------------------------------------
-# TMUX
-#----------------------------------------------------------------------------------
-#if [ -z "$TMUX" ]; then
-#    tmux attach -t default || tmux new -s default
-#fi

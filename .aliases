@@ -3,7 +3,7 @@
 alias psu='ps -aef | grep $USER'
 alias pdb='/usr/lib/python3.6/pdb.py'
 alias qf='grep -nrsiI  '
-alias qfc='grep -nrsiI  --include="*.c" --include="*.cpp" --include="*.h" --include="*.hxx" --include="*.py"'
+alias qfc='grep -nrsI --include="*.py" --include="*.h" --include="*.hpp" --include="*.hxx" --include="*.hh" --include="*.c" --include="*.cpp" --include="*.cc" --include="*.cxx"  '
 alias xterm=_xterm
 alias tmux='tmux -f ~/work/dotfiles/.tmux.conf'
 alias news='newsbeuter -r -u ~/work/reading/newsbeuter/urls -c ~/work/reading/newsbeuter/cache.db'

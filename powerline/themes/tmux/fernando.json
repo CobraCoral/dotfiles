@@ -6,9 +6,13 @@
         "name": "player",
 				"args": {
           "state_symbols": {"fallback": " ", "pause": "⏸ ", "stop": "⏹ ", "play": "🎵 "},
-          "format": "{state_symbol} 𝄢 {artist} 𝄞 {title} 🎶 ({elapsed})"
+          "format": "{state_symbol} 𝄢 {artist} 𝄞 {title} 🎶 ({total})"
 				}
-      }
+      },
+	  {
+		  "function": "mysegments.custom.study_schedule",
+		  "priority": 50
+	  }
     ],
 		"right": [
 			{

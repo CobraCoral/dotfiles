@@ -1,43 +1,30 @@
 " -----------------------------------------------------------
 " General setup
 " -----------------------------------------------------------
+set backspace=2 " enable backspace to delete anyting (includes \n) in insert mode
+set backspace=indent,eol,start " allow backspacing over everything in insert mode
+set nocompatible " Disable compatibility with old VI
+set errorbells " jingle bells, jingle bells, hingle bells, ....
+set et " turn off tab insertion
 
-" enable backspace to delete anyting (includes \n) in insert mode
-set backspace=2
-
-" allow backspacing over everything in insert mode
-set backspace=indent,eol,start
-
-set nocompatible
-" jingle bells, jingle bells, hingle bells, ....
-set errorbells
-
-" turn off tab insertion
-set et
 " -----------------------------------------------------------
 " Text-Formatting, Identing, Tabbing
 " -----------------------------------------------------------
-set expandtab
+syntax on                   " syntax highlighting
+"set number                  " add line numbers
 set sts=3
 set visualbell
-" autoindenting (local to buffer)
-set ai
-" smartindenting (clever autoindenting)
-set si
-" number of spaces the tab stands for
-set tabstop=4
-" number of spaces used for (auto)indenting
-set shiftwidth=4
-" a <tab> in an indent insets 'shiftwidth' spaces (not tabstop)
-set smarttab
-" if non-zero, number of spaces to insert for a <tab>
-set softtabstop=4
-" enable specific indenting for c-code and others
-set cindent
-" and here some nice options for cindenting
-set cinoptions={.5s,+.5s,t0,n-2,p2s,(03s,=.5s,>1s,=1s,:1s   " by FOLKE
-" now real wrap during insert (enable/override this when using as mail-editor)
-set tw=0
+set ai " autoindenting (local to buffer)
+set si " smartindenting (clever autoindenting)
+set tabstop=4 " number of spaces the tab stands for
+set softtabstop=4 " if non-zero, number of spaces to insert for a <tab>
+set expandtab               " converts tabs to white space
+set shiftwidth=4 " number of spaces used for (auto)indenting
+set smarttab " a <tab> in an indent insets 'shiftwidth' spaces (not tabstop)
+set cindent " enable specific indenting for c-code and others
+set cinoptions={.5s,+.5s,t0,n-2,p2s,(03s,=.5s,>1s,=1s,:1s   " by FOLKE " and here some nice options for cindenting
+set cc=80 " set an 80 column border for good coding style
+set tw=0 " now real wrap during insert (enable/override this when using as mail-editor)
 " use full featured format-options. see "help fo-table for help
 if v:version >= 600
     set formatoptions=tcrqn2
@@ -45,8 +32,7 @@ else
     " vim 5 doesn't know r/n
     set formatoptions=tcq2
 endif
-" write before changing files
-:set autowrite
+:set autowrite " write before changing files
 
 " define what are comments
 set com& " reset to default
@@ -60,74 +46,55 @@ endif
 " -----------------------------------------------------------
 " Searching, Substituting
 " -----------------------------------------------------------
-
-" select case-insenitiv search
-set ignorecase 
-" No ignorecase if Uppercase chars in search
-set scs
-" change the way backslashes are used in search patterns
-set magic
-" begin search at top when EOF reached
-set wrapscan
-" jump to matches during entering the pattern
-set sm
-" highlight all matches...
-set hls
-" ...and also during entering the pattern
-set incsearch
-" display incomplete commands
-set showcmd
-" use 'g'-flag when substituting (subst. all matches in that line, not only first)
-" to turn off, use g (why is there no -g ?)
-set gdefault
-" turn off the fucking :s///gc toggling
-set noedcompatible
+set ignorecase " select case-insenitiv search
+set scs " No ignorecase if Uppercase chars in search
+set magic " change the way backslashes are used in search patterns
+set wrapscan " begin search at top when EOF reached
+set sm " jump to matches during entering the pattern
+"set hls " highlight all matches...
+set incsearch " ...and also during entering the pattern
+set showcmd " display incomplete commands
+set gdefault " use 'g'-flag when substituting (subst. all matches in that line, not only first) to turn off, use g (why is there no -g ?)
+set noedcompatible " turn off the fucking :s///gc toggling
 " Don't use Ex mode, use Q for formatting
 map Q gq
 " Make p in Visual mode replace the selected text with the "" register.
 vnoremap p <Esc>:let current_reg = @"<CR>gvs<C-R>=current_reg<CR><Esc>
 
-" -----------------------------------------------------------
-" Highlighting, Colors, Fonts
-" -----------------------------------------------------------
+"""" -----------------------------------------------------------
+"""" Highlighting, Colors, Fonts
+"""" -----------------------------------------------------------
+"""" when we have a colored terminal or gui...
+"""if &t_Co > 2 || has("gui_running")
+"""    " ...then use highlighting
+"""    syntax on
+"""    " Also switch on highlighting the last used search pattern.
+"""    set hlsearch
+"""endif
+"""
+"""if has("gui_running")
+"""    "Standartgroesse bei'm GUI-Fenster
+"""    "columns    width of the display
+"""    set co=98
+"""    "lines      number of lines in the display
+"""    set lines=41
+"""    if has("win32")
+"""        set guifont=Fixedsys:h9:cANSI
+"""        "set guifont=Courier:h10:cANSI
+"""    else
+"""        set gfn=-adobe-courier-medium-r-normal-*-*-140-*-*-m-*-iso8859-15
+"""    endif
+"""    "colorscheme morning
+"""endif
+"""
+"""if !has('gui_running')
+"""  set t_Co=256
+"""endif
 
-" when we have a colored terminal or gui...
-if &t_Co > 2 || has("gui_running")
-    " ...then use highlighting
-    syntax on
-    " Also switch on highlighting the last used search pattern.
-    set hlsearch
-endif
+syn sync minlines=10000 maxlines=10000 " how many lines to sync backwards
+let c_minlines = 200 " how many lines to search backward after a jump to check syntax
+let c_comment_strings = 1 " aldo highlight some things in comments
 
-if has("gui_running")
-    "Standartgroesse bei'm GUI-Fenster
-    "columns    width of the display
-    set co=98
-    "lines      number of lines in the display
-    set lines=41
-    if has("win32")
-        set guifont=Fixedsys:h9:cANSI
-        "set guifont=Courier:h10:cANSI
-    else
-        set gfn=-adobe-courier-medium-r-normal-*-*-140-*-*-m-*-iso8859-15
-    endif
-    "colorscheme morning
-endif
-
-if !has('gui_running')
-  set t_Co=256
-endif
-
-" how many lines to sync backwards
-syn sync minlines=10000 maxlines=10000
-" how many lines to search backward after a jump to check syntax
-let c_minlines = 200
-" aldo highlight some things in comments
-let c_comment_strings = 1
-" SQL-Highlighting in PHP-Strings (1=yes 0=no)
-let php_sql_query = 1
-let php_minlines=300
-let php_htmlInStrings=1
 " use white background in GUI-Mode, black on console
 if has("gui_running") 
 "|| &term=="xterm"
@@ -136,58 +103,36 @@ else
     set bg=dark
 endif
 
-" use css when converting syntax to html (2html.vim)
-let html_use_css = 1
-" and a nice command for makeing html-code
-command Code2html :source $VIMRUNTIME/syntax/2html.vim|
+let html_use_css = 1 " use css when converting syntax to html (2html.vim)
+command Code2html :source $VIMRUNTIME/syntax/2html.vim| " and a nice command for makeing html-code
 
 " -----------------------------------------------------------
 " Statusline, Menu
 " -----------------------------------------------------------
-
-" use tab for auto-expansion in menus
-set wc=<TAB>
-" show a list of all matches when tabbing a command
-set wmnu
-" how command line completion works
-set wildmode=list:longest,list:full
-" ignore some files for filename completion
-set wildignore=*.o,*.r,*.so,*.sl,*.tar,*.tgz
-" some filetypes got lower priority
-set su=.h,.bak,~,.o,.info,.swp,.obj
-" remember last 2000 typed commands
-set hi=2000
-" show cursor position below each window
-set ruler
-" shows the current status (insert, visual, ...) in statusline
-set showmode
-" use shortest messages
-set shm=a
-" show always statusline of last window
-set laststatus=2
+set wc=<TAB> " use tab for auto-expansion in menus
+set wmnu " show a list of all matches when tabbing a command
+set wildmode=list:longest,list:full " how command line completion works
+set wildignore=*.o,*.r,*.so,*.sl,*.tar,*.tgz " ignore some files for filename completion
+set su=.h,.bak,~,.o,.info,.swp,.obj " some filetypes got lower priority
+set hi=2000 " remember last 2000 typed commands
+set ruler " show cursor position below each window
+set showmode " shows the current status (insert, visual, ...) in statusline
+set shm=a " use shortest messages
+set laststatus=2 " show always statusline of last window
 
 " -----------------------------------------------------------
 " Insert-Mode Completion
 " -----------------------------------------------------------
-
-" order and what to complete. see ":help complete" for info
-set     complete=.,w,b,u,t,i
-" enable dictionary (add k to complete to scan dict when completing)
-" set dict=<FILENAME>
-" adjust case of a keyword completion match
-set infercase
-" showfulltag   when completing tags in Insert mode show only the name
-" not any arguments (when a c-funtion is inserted)
-set nosft
+set     complete=.,w,b,u,t,i " order and what to complete. see ":help complete" for info
+" set dict=<FILENAME> " enable dictionary (add k to complete to scan dict when completing)
+set infercase " adjust case of a keyword completion match
+set nosft " showfulltag   when completing tags in Insert mode show only the name not any arguments (when a c-funtion is inserted)
 
 " -----------------------------------------------------------
 " Tag search (c-code) and tag highlighting
 " -----------------------------------------------------------
-
-" where to look for tags
-set     tags=./tags,../tags,../../tags,../../../tags,/usr/include/tags
-" double-click opens preview-window with matching tag
-noremap <2-LeftMouse> :call MousePush()<cr>
+set     tags=./tags,../tags,../../tags,../../../tags,/usr/include/tags " where to look for tags
+noremap <2-LeftMouse> :call MousePush()<cr> " double-click opens preview-window with matching tag
 " and also <Strg-_> (useful on console or using no mouse)
 map ^_ :call MousePush()<cr>
 imap ^_  <space><esc>:let pos_pos = line('.').'normal! '.virtcol('.').'<bar>'<cr>[(^[[D:call MousePush()<cr>:exe pos_pos<cr>a<backspace>
@@ -220,26 +165,22 @@ au BufRead *
 " -----------------------------------------------------------
 " window handling
 " -----------------------------------------------------------
+set mousef " focus follows mouse
+set wh=1 " minimal number of lines used for the current window
+set wmh=0 " minimal number of lines used for any window
+set noequalalways " make all windows the same size when adding/removing windows
+set splitbelow "a new window is put below the current one
 
-" focus follows mouse
-set mousef
-" minimal number of lines used for the current window
-set wh=1
-" minimal number of lines used for any window
-set wmh=0
-" make all windows the same size when adding/removing windows
-set noequalalways
-"a new window is put below the current one
-set splitbelow
+" -----------------------------------------------------------
+" mouse
+" -----------------------------------------------------------
+set mouse=v                 " middle-click paste with mouse
 
 " -----------------------------------------------------------
 " file, backup, path
 " -----------------------------------------------------------
-
-" updatecount   number of characters typed to cause a swap file update
-set uc=50
-" make no backups
-set nobackup
+set uc=50 " updatecount   number of characters typed to cause a swap file update
+set nobackup " make no backups
 
 if has("unix")
     if v:version >= 600
@@ -249,61 +190,9 @@ if has("unix")
     endif
 endif
 
-
-" -----------------------------------------------------------
-" WIN-GUI Specials
-" -----------------------------------------------------------
-
-" first of all: we don't use "behave windows"
-" to try to get a better clipboard-handling
-" (we do it ourself)
-
-if has("win32")
-    if has("gui_running")
-        " alt jumps to menu
-        set winaltkeys=menu
-        " clipboard to autoselect
-        set guioptions+=a
-
-        " ---- Windows Like keys ----
-        " CTRL-Z is Undo; not in cmdline though
-        noremap <C-Z> u
-        inoremap <C-Z> <C-O>u
-        " CTRL-Y is Redo (although not repeat); not in cmdline though
-        noremap <C-Y> <C-R>
-        inoremap <C-Y> <C-O><C-R>
-        " CTRL-A is Select all
-        noremap <C-A> gggH<C-O>G
-        inoremap <C-A> <C-O>gg<C-O>gH<C-O>G
-        cnoremap <C-A> <C-C>gggH<C-O>G
-        " CTRL-F4 is Close window
-        noremap <C-F4> <C-W>c
-        inoremap <C-F4> <C-O><C-W>c
-        cnoremap <C-F4> <C-C><C-W>c
-        " CTRL-Tab is Next window
-        noremap <C-Tab> <C-W>w
-        inoremap <C-Tab> <C-O><C-W>w
-        cnoremap <C-Tab> <C-C><C-W>w
-        " ---- Windows Like Copy-Paste keys ----
-        " CTRL-v is paste
-        inoremap <C-v> <esc>"*p<return>i
-        noremap <C-v> "*p<return>
-        " CTRL-x is cut (in visual mode only)
-        vnoremap <C-x> "*d
-        " CTRL-c is copy (in visual mode only)
-        vnoremap <C-c> "*y
-        " ---- Restore some remapped things 
-        " make real <C-V> (visual block) as <C-Q> available
-        noremap <c-q> <c-v>
-        inoremap <C-Y> <C-Y>
-
-    endif
-endif
-
 " -----------------------------------------------------------
 " UNIX Specials
 " -----------------------------------------------------------
-
 if has("unix")
   if !has("nvim")
     set clipboard=autoselect
@@ -315,7 +204,6 @@ endif
 " -----------------------------------------------------------
 " Special Features
 " -----------------------------------------------------------
-
 if v:version >= 600
     filetype on
     filetype indent on
@@ -390,7 +278,7 @@ nmap _S :%s/^\s\+//<CR>
 command Unixformat :set ff=unix
 command Dosformat :set ff=dos
 
-" toggle highlight search (folke)
+" toggle h",highlight search (folke)
 noremap <F4>  :if 1 == &hls \| noh \| else \| set hls \| endif \| <CR>
 
 
@@ -484,36 +372,51 @@ Plug 'maximbaz/lightline-ale'
 Plug 'albertomontesg/lightline-asyncrun'
 Plug 'rmolin88/pomodoro.vim'
 Plug 'gruvbox-material/vim', {'as': 'gruvbox-material'}
+Plug 'arcticicestudio/nord-vim'
+Plug 'rakr/vim-one'
+Plug 'drewtempelmeyer/palenight.vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'itchyny/lightline.vim'
 if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-  Plug 'zchee/deoplete-jedi', { 'for': 'python' }
+  "Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  "Plug 'zchee/deoplete-jedi', { 'for': 'python' }
+  "Plug 'zchee/deoplete-clang'
   Plug 'Shougo/neco-vim', { 'for': 'vim' }
+  Plug 'Shougo/neoinclude.vim'
+  "Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
 endif
 " Initialize plugin system
 call plug#end()
 
-" deoplete
+" use deoplete
 let g:deoplete#enable_at_startup = 1
 " <TAB>: completion.
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
+" deoplete-clang
+let g:deoplete#sources#clang#libclang_path = '/usr/lib/libcln.so.6'
+let g:deoplete#sources#clang#clang_header = '/usr/include/clang/'
+let g:deoplete#sources#clang#std = 'c++17'
+"let g:deoplete#sources#clang#flags = ''
+let g:deoplete#sources#clang#sort_algo = 'priority'
+"let g:deoplete#sources#clang#clang_complete_database =
+"'/home/fcavalcanti/work/source/code/build'
+"let g:deoplete#sources#clang#include_default_arguments = ''
+"let g:deoplete#sources#clang#filter_availability_kinds = ''
+
 " Personalization
-set showmatch
+set showmatch " show matching brackets
 set guioptions-=T
 set vb t_vb=
 set incsearch
 set virtualedit=all
 set guifont=char
-" important!!
-set termguicolors
-
-" for dark version
-set background=dark
-
-" for light version
-"set background=light
+set termguicolors " important!!
+set background=dark " for dark version
+"set background=light " for light version
+" This line enables the true color support.
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
 " set contrast
 " this configuration option should be placed before `colorscheme gruvbox-material`
@@ -522,15 +425,54 @@ let g:gruvbox_material_background = 'hard'
 
 "" Airline
 "let g:airline_theme = 'gruvbox_material'
+let g:airline_theme = 'one'
 
-" Lightline
-let g:lightline = {}
-let g:lightline.colorscheme = 'gruvbox_material'
+"" Lightline
+"let g:lightline = {}
+"let g:lightline.colorscheme = 'gruvbox_material'
+"colorscheme gruvbox-material
 
-colorscheme gruvbox-material
-" colorscheme icansee
-"source ~/work/dotfiles/.vim/icansee.vim
+"#############################################################################
+" Attempting to set 24-bit (true-color)
+"-----------------------------------------------------------------------------
+"Credit joshdick
+"Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
+"If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support
+"(see < http://sunaku.github.io/tmux-24bit-color.html#usage > for more information.)
+if (empty($TMUX))
+  if (has("nvim"))
+  "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
+  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+  endif
+  "For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
+  "Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
+  " < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
+  if (has("termguicolors"))
+    set termguicolors
+  endif
+endif
+
+
+set background=dark " for the dark version
+" set background=light " for the light version
+"colorscheme one
+"-----------------------------------------------------------------------------
+
+colorscheme evening
+set t_Co=256
+set t_ut=
+"set background=dark
+set guifont=Inconsolata\ Nerd\ Font\ Complete:h10
+"~/Downloads/nerd-fonts/patched-fonts/Inconsolata/complete/Inconsolata\ Nerd\ Font\ Complete.otf
+"#############################################################################
 
 if has('nvim')
     set path+=**
 endif
+
+" remap mapleader key (usually, \)
+let mapleader = ";"
+
+" For C++
+source /home/fcavalcanti/work/dotfiles/.coc.vim
+
