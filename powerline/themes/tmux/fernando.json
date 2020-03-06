@@ -7,32 +7,38 @@
 				"args": {
           "state_symbols": {"fallback": " ", "pause": "⏸ ", "stop": "⏹ ", "play": "🎵 "},
           "format": "{state_symbol} 𝄢 {artist} 𝄞 {title} 🎶 ({total})"
-				}
+				},
+         "priority": 90
       },
 	  {
-		  "function": "mysegments.custom.study_schedule",
-		  "priority": 50
+		  "function": "mysegments.getstudyschedule.study_schedule",
+		  "priority": 30
+	  },
+	  {
+		  "function": "mysegments.gitcheck.check",
+		  "priority": 20
 	  }
     ],
 		"right": [
 			{
 				"function": "powerline.segments.common.wthr.weather",
-				"priority": 50
+				"priority": 10
 			},
 			{
 				"function": "powerline.segments.common.bat.battery",
-				"priority": 50
+				"priority": 20
 			},
 			{
 				"function": "powerline.segments.common.net.network_load",
-				"priority": 50
+				"priority": 80
 			},
 			{
 				"function": "powerline.segments.common.sys.system_load",
-				"priority": 50
+				"priority": 80
 			},
 			{
-				"function": "powerline.segments.common.time.date"
+				"function": "powerline.segments.common.time.date",
+				"priority": 90
 			},
 			{
 				"function": "powerline.segments.common.time.date",
@@ -40,10 +46,12 @@
 				"args": {
 					"format": "%H:%M",
 					"istime": true
-				}
+				},
+				"priority": 70
 			},
 			{
-				"function": "powerline.segments.common.net.hostname"
+				"function": "powerline.segments.common.net.hostname",
+				"priority": 100
 			}
 		]
 	}

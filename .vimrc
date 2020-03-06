@@ -390,7 +390,6 @@ source /home/fcavalcanti/work/dotfiles/.coc.vim
 " Highlighting, Colors, Fonts
 " -----------------------------------------------------------
 if exists('+termguicolors')
-  echo "We have termguicolors"
   "colorscheme one
   colorscheme elflord
   "colorscheme gruvbox-material

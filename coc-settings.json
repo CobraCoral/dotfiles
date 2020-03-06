@@ -1,0 +1,42 @@
+{
+    "languageserver": {
+        "ccls": {
+            "command": "/home/fcavalcanti/work/sbin/ccls",
+            "filetypes": [
+                "c",
+                "cpp",
+                "cxx",
+                "objc",
+                "objcpp"
+            ],
+            "rootPatterns": [
+                ".ccls",
+                "compile_commands.json",
+                ".vim/",
+                ".git/",
+                ".hg/"
+            ],
+            "initializationOptions": {
+                "cache": {
+                    "directory": "/tmp/ccls"
+                },
+                // see https://github.com/MaskRay/ccls/issues/191
+                "clang": {
+                    // from clang -v -fsyntax-only -x c++ /dev/null
+                    "extraArgs": [
+                        "-i/usr/bin/../lib/gcc/x86_64-linux-gnu/7.4.0/../../../../include/c++/7.4.0",
+                        "-i/usr/bin/../lib/gcc/x86_64-linux-gnu/7.4.0/../../../../include/x86_64-linux-gnu/c++/7.4.0",
+                        "-i/usr/bin/../lib/gcc/x86_64-linux-gnu/7.4.0/../../../../include/c++/7.4.0/backward",
+                        "-i/usr/include/clang/6.0.0/include",
+                        "-i/usr/local/include",
+                        "-i/usr/include/x86_64-linux-gnu",
+                        "-i/usr/include"
+                    ],
+                    //From clang -print-resource-dir
+                    "resourceDir": "/usr/lib/llvm-6.0/lib/clang/6.0.0"
+                }
+
+            }
+        }
+    }
+}

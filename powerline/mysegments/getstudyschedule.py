@@ -32,6 +32,10 @@ class CustomSegment(Segment):
     return [{
       'contents': value,
       'highlight_groups': ['information:regular'],
+      'draw_soft_divider': False,
+      'draw_hard_dividier': False,
+      'draw_inner_dividier': False,
+      'divider_highlight_group': 'cwd:divider', 
       }]
 
 study_schedule = with_docstring(CustomSegment(), '''Return a custom segment.''')
