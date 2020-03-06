@@ -1,0 +1,66 @@
+{
+    "days": {
+        "Monday": {
+            "08": "C++",
+            "09": "DS/Algos",
+            "10":"Linux",
+            "11":"ML",
+            "13":"House",
+            "14":"Games",
+            "15":"Music",
+            "16":"Clash",
+            "21":"Reading"
+        },
+        "Tuesday": {
+            "08": "C++",
+            "09": "DS/Algos",
+            "10":"Linux",
+            "11":"ML",
+            "13":"House",
+            "14":"Games",
+            "15":"Music",
+            "16":"Clash",
+            "21":"Reading"
+        },
+        "Wednesday": {
+            "08": "C++",
+            "09": "Architecture",
+            "10":"Micro Services",
+            "11":"LowLatency",
+            "13":"House",
+            "14":"Games",
+            "15":"Music",
+            "16":"Clash",
+            "21":"Reading"
+        },
+        "Thursday": {
+            "08": "C++",
+            "09": "Architecture",
+            "10":"Python",
+            "11":"IPC",
+            "13":"House",
+            "14":"Games",
+            "15":"Music",
+            "16":"Clash",
+            "21":"Reading"
+        },
+        "Friday": {
+            "08": "C++",
+            "09": "Architecture",
+            "10":"Jupyter",
+            "11":"Blockchain",
+            "13":"House",
+            "14":"Games",
+            "15":"Music",
+            "16":"Clash",
+            "21":"Reading"
+        },
+        "Saturday": {
+            "08": "Free"
+        },
+        "Sunday": {
+            "08": "Free"
+        }
+    }
+}
+
