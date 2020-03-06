@@ -61,47 +61,9 @@ map Q gq
 " Make p in Visual mode replace the selected text with the "" register.
 vnoremap p <Esc>:let current_reg = @"<CR>gvs<C-R>=current_reg<CR><Esc>
 
-"""" -----------------------------------------------------------
-"""" Highlighting, Colors, Fonts
-"""" -----------------------------------------------------------
-"""" when we have a colored terminal or gui...
-"""if &t_Co > 2 || has("gui_running")
-"""    " ...then use highlighting
-"""    syntax on
-"""    " Also switch on highlighting the last used search pattern.
-"""    set hlsearch
-"""endif
-"""
-"""if has("gui_running")
-"""    "Standartgroesse bei'm GUI-Fenster
-"""    "columns    width of the display
-"""    set co=98
-"""    "lines      number of lines in the display
-"""    set lines=41
-"""    if has("win32")
-"""        set guifont=Fixedsys:h9:cANSI
-"""        "set guifont=Courier:h10:cANSI
-"""    else
-"""        set gfn=-adobe-courier-medium-r-normal-*-*-140-*-*-m-*-iso8859-15
-"""    endif
-"""    "colorscheme morning
-"""endif
-"""
-"""if !has('gui_running')
-"""  set t_Co=256
-"""endif
-
 syn sync minlines=10000 maxlines=10000 " how many lines to sync backwards
 let c_minlines = 200 " how many lines to search backward after a jump to check syntax
 let c_comment_strings = 1 " aldo highlight some things in comments
-
-" use white background in GUI-Mode, black on console
-if has("gui_running") 
-"|| &term=="xterm"
-    set bg=light
-else
-    set bg=dark
-endif
 
 let html_use_css = 1 " use css when converting syntax to html (2html.vim)
 command Code2html :source $VIMRUNTIME/syntax/2html.vim| " and a nice command for makeing html-code
@@ -123,7 +85,7 @@ set laststatus=2 " show always statusline of last window
 " -----------------------------------------------------------
 " Insert-Mode Completion
 " -----------------------------------------------------------
-set     complete=.,w,b,u,t,i " order and what to complete. see ":help complete" for info
+set complete=.,w,b,u,t,i " order and what to complete. see ":help complete" for info
 " set dict=<FILENAME> " enable dictionary (add k to complete to scan dict when completing)
 set infercase " adjust case of a keyword completion match
 set nosft " showfulltag   when completing tags in Insert mode show only the name not any arguments (when a c-funtion is inserted)
@@ -131,7 +93,7 @@ set nosft " showfulltag   when completing tags in Insert mode show only the name
 " -----------------------------------------------------------
 " Tag search (c-code) and tag highlighting
 " -----------------------------------------------------------
-set     tags=./tags,../tags,../../tags,../../../tags,/usr/include/tags " where to look for tags
+set tags=./tags,../tags,../../tags,../../../tags,/usr/include/tags " where to look for tags
 noremap <2-LeftMouse> :call MousePush()<cr> " double-click opens preview-window with matching tag
 " and also <Strg-_> (useful on console or using no mouse)
 map ^_ :call MousePush()<cr>
@@ -165,7 +127,6 @@ au BufRead *
 " -----------------------------------------------------------
 " window handling
 " -----------------------------------------------------------
-set mousef " focus follows mouse
 set wh=1 " minimal number of lines used for the current window
 set wmh=0 " minimal number of lines used for any window
 set noequalalways " make all windows the same size when adding/removing windows
@@ -174,7 +135,8 @@ set splitbelow "a new window is put below the current one
 " -----------------------------------------------------------
 " mouse
 " -----------------------------------------------------------
-set mouse=v                 " middle-click paste with mouse
+set mouse=v " middle-click paste with mouse
+set mousef " focus follows mouse
 
 " -----------------------------------------------------------
 " file, backup, path
@@ -198,7 +160,8 @@ if has("unix")
     set clipboard=autoselect
   else
   endif
-    set shell=/bin/zsh
+
+  set shell=/bin/zsh
 endif
 
 " -----------------------------------------------------------
@@ -281,13 +244,6 @@ command Dosformat :set ff=dos
 " toggle h",highlight search (folke)
 noremap <F4>  :if 1 == &hls \| noh \| else \| set hls \| endif \| <CR>
 
-
-"noremap <PageUp> <c-u>
-"noremap <PageDown> <c-d>
-
-" <Tab> is bound to `complete'
-" inoremap <Tab> ^P
-
 " cycle thru errors (folke)
 nnoremap <M-PageDown> :cn<cr>
 nnoremap <M-PageUp> :cp<cr>
@@ -318,7 +274,6 @@ endfun
 
 inoremap <F10> <esc>:call SavePos()<CR>ggVG=:call RestorePos()<CR>a
 nnoremap <F10> :call SavePos()<CR>ggVG=:call RestorePos()<CR>
-
 
 " Folkes magic :wq in insertmode
 function Wqtipper()
@@ -355,12 +310,6 @@ nmap <C-Delete> :tabclose<CR>
 " FZF
 set rtp+=/home/linuxbrew/.linuxbrew/opt/fzf
 
-" Enable true color
-if exists('+termguicolors')
-  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-  set termguicolors
-endif
 
 " Plugins
 call plug#begin('~/.vim/bundle')
@@ -412,11 +361,6 @@ set vb t_vb=
 set incsearch
 set virtualedit=all
 set guifont=char
-set termguicolors " important!!
-set background=dark " for dark version
-"set background=light " for light version
-" This line enables the true color support.
-let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
 " set contrast
 " this configuration option should be placed before `colorscheme gruvbox-material`
@@ -425,45 +369,11 @@ let g:gruvbox_material_background = 'hard'
 
 "" Airline
 "let g:airline_theme = 'gruvbox_material'
-let g:airline_theme = 'one'
+"let g:airline_theme = 'one'
 
 "" Lightline
 "let g:lightline = {}
 "let g:lightline.colorscheme = 'gruvbox_material'
-"colorscheme gruvbox-material
-
-"#############################################################################
-" Attempting to set 24-bit (true-color)
-"-----------------------------------------------------------------------------
-"Credit joshdick
-"Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
-"If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support
-"(see < http://sunaku.github.io/tmux-24bit-color.html#usage > for more information.)
-if (empty($TMUX))
-  if (has("nvim"))
-  "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
-  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-  endif
-  "For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
-  "Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
-  " < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
-  if (has("termguicolors"))
-    set termguicolors
-  endif
-endif
-
-
-set background=dark " for the dark version
-" set background=light " for the light version
-"colorscheme one
-"-----------------------------------------------------------------------------
-
-colorscheme evening
-set t_Co=256
-set t_ut=
-"set background=dark
-set guifont=Inconsolata\ Nerd\ Font\ Complete:h10
-"~/Downloads/nerd-fonts/patched-fonts/Inconsolata/complete/Inconsolata\ Nerd\ Font\ Complete.otf
 "#############################################################################
 
 if has('nvim')
@@ -476,3 +386,47 @@ let mapleader = ";"
 " For C++
 source /home/fcavalcanti/work/dotfiles/.coc.vim
 
+" -----------------------------------------------------------
+" Highlighting, Colors, Fonts
+" -----------------------------------------------------------
+if exists('+termguicolors')
+  echo "We have termguicolors"
+  "colorscheme one
+  colorscheme elflord
+  "colorscheme gruvbox-material
+
+  set t_Co=256
+  set t_ut=
+  set guifont=Inconsolata\ Nerd\ Font\ Complete:h10 "~/Downloads/nerd-fonts/patched-fonts/Inconsolata/complete/Inconsolata\ Nerd\ Font\ Complete.otf
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+
+  "#############################################################################
+  " Attempting to set 24-bit (true-color)
+  "-----------------------------------------------------------------------------
+  "Credit joshdick
+  "Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
+  "If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support
+  "(see < http://sunaku.github.io/tmux-24bit-color.html#usage > for more information.)
+  if (empty($TMUX))
+    if (has("nvim"))
+    "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
+    let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+    endif
+    "For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
+    "Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
+    " < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
+    if (has("termguicolors"))
+      set termguicolors
+    endif
+  endif
+  
+  set background=dark " for the dark version
+  " set background=light " for the light version
+  " Making background transparent
+  hi! Normal ctermbg=NONE guibg=NONE
+  hi! NonText ctermbg=NONE guibg=NONE
+  "-----------------------------------------------------------------------------
+  set termguicolors " important!!
+  let $NVIM_TUI_ENABLE_TRUE_COLOR=1 " This line enables the true color support.
+endif
