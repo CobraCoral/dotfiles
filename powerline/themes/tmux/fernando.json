@@ -15,7 +15,7 @@
 		  "priority": 30
 	  },
 	  {
-		  "function": "mysegments.gitcheck.check",
+		  "function": "mysegments.gitcheck.gitcheck",
 		  "priority": 20
 	  }
     ],

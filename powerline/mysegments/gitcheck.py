@@ -34,5 +34,5 @@ class CustomSegment(Segment):
       'contents':value,
       }]
 
-check = with_docstring(CustomSegment(), '''Return a custom segment.''')
+gitcheck = with_docstring(CustomSegment(), '''Return a custom segment.''')
 
