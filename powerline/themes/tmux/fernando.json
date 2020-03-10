@@ -17,6 +17,10 @@
 	  {
 		  "function": "mysegments.gitcheck.gitcheck",
 		  "priority": 20
+	  },
+	  {
+		  "function": "mysegments.vpncheck.vpncheck",
+		  "priority": 20
 	  }
     ],
 		"right": [

@@ -55,6 +55,7 @@
 		"attached_clients":           { "fg": "gray8", "bg": "gray0", "attrs": [] },
 		"default":                    { "fg": "gray9", "bg": "gray4", "attrs": [] },
 		"study_schedule":             "default",
-		"gitcheck":                   "default"
+		"gitcheck":                   "default",
+		"vpncheck":                   "default"
 	}
 }

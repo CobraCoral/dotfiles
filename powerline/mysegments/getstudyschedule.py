@@ -31,11 +31,13 @@ class CustomSegment(Segment):
     value = '%s: %s'%(getStudyValue(weekday=calendar.day_name[now.weekday()], hour=now.strftime('%H')))
     return [{
       'contents': value,
-      'highlight_groups': ['information:regular'],
-      'draw_soft_divider': False,
-      'draw_hard_dividier': False,
+      #'highlight_groups': ['information:regular'],
+	'highlight_groups': ['information:highlighted'],
+      #'highlight_groups': ['player'],
+      'draw_soft_divider': True,
+      'draw_hard_dividier': True,
       'draw_inner_dividier': False,
-      'divider_highlight_group': 'cwd:divider', 
+      #'divider_highlight_group': 'cwd:divider', 
       }]
 
 study_schedule = with_docstring(CustomSegment(), '''Return a custom segment.''')

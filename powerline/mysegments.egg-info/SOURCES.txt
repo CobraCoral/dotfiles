@@ -3,6 +3,7 @@ setup.py
 mysegments/__init__.py
 mysegments/getstudyschedule.py
 mysegments/gitcheck.py
+mysegments/vpncheck.py
 mysegments.egg-info/PKG-INFO
 mysegments.egg-info/SOURCES.txt
 mysegments.egg-info/dependency_links.txt

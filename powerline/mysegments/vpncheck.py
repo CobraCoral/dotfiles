@@ -4,13 +4,13 @@ from powerline.segments import Segment, with_docstring
 from powerline.theme import requires_segment_info, requires_filesystem_watcher
 import subprocess, os
 
-def callgitcheck(*args, **kwargs):
-    os.chdir('/home/fcavalcanti/work')
-    args=['/home/fcavalcanti/work/sbin/gitcheck.sh']
+def callvpncheck(*args, **kwargs):
+    os.chdir('/home/fcavalcanti/work/sbin/cyberghost')
+    args=['cyberghostvpn', '--status']
     with subprocess.Popen(args, stdout=subprocess.PIPE) as proc:
         changes = proc.stdout.read()
-    retVal = "🚧"
-    if not len(changes):
+    retVal = "👻"
+    if 'No VPN connections found' in changes.decode():
         retVal = None
     return (retVal)
 
@@ -20,14 +20,13 @@ class CustomSegment(Segment):
   divider_highlight_group = None
 
   def __call__(self, pl, segment_info, create_watcher):
-    value = callgitcheck()
-    if not value: # do not display if everything is committed in git
+    value = callvpncheck()
+    if not value: # do not display if cyberghost is not running
         return None
 
     return [{
       #highlight_groups can be found in ~/.config/powerline/colorschemes/default.json
-      #'highlight_groups': ['critical:failure'],
-      #'highlight_groups': ['warning:regular'],
+      #'highlight_groups': ['information:priority'],
       'highlight_groups': ['player'],
       'draw_soft_divider': True,
       'draw_hard_divider': True,
@@ -36,5 +35,5 @@ class CustomSegment(Segment):
       'contents':value,
       }]
 
-gitcheck = with_docstring(CustomSegment(), '''Return a custom segment.''')
+vpncheck = with_docstring(CustomSegment(), '''Return a custom segment.''')
 
