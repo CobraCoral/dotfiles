@@ -390,8 +390,8 @@ source /home/fcavalcanti/work/dotfiles/.coc.vim
 " Highlighting, Colors, Fonts
 " -----------------------------------------------------------
 if exists('+termguicolors')
-  "colorscheme one
-  colorscheme elflord
+  colorscheme one
+  "colorscheme elflord
   "colorscheme gruvbox-material
 
   set t_Co=256

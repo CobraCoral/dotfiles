@@ -9,7 +9,7 @@ def callgitcheck(*args, **kwargs):
     args=['/home/fcavalcanti/work/sbin/gitcheck.sh']
     with subprocess.Popen(args, stdout=subprocess.PIPE) as proc:
         changes = proc.stdout.read()
-    retVal = " XXX "
+    retVal = "🚧"
     if not len(changes):
         retVal = None
     return (retVal)

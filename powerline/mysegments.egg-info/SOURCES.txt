@@ -1,7 +1,8 @@
 README.md
 setup.py
 mysegments/__init__.py
-mysegments/custom.py
+mysegments/getstudyschedule.py
+mysegments/gitcheck.py
 mysegments.egg-info/PKG-INFO
 mysegments.egg-info/SOURCES.txt
 mysegments.egg-info/dependency_links.txt
