@@ -1,0 +1,10 @@
+[hub]
+	username = cobracoral
+	oauthtoken = cbb2cdee5eacf6c9134bc94a113f9ac0251f6b18
+[user]
+	email = fernando.fcavalcanti@gmail.com
+	name = Fernando C. Jeronymo
+[core]
+	editor = /usr/bin/vim
+[credential]
+	helper = cache

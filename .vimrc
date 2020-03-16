@@ -326,13 +326,11 @@ Plug 'rakr/vim-one'
 Plug 'drewtempelmeyer/palenight.vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'itchyny/lightline.vim'
+"Plug 'avakhov/vim-yaml'
+"Plug 'mrk21/yaml-vim' " For hieradata
 if has('nvim')
-  "Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-  "Plug 'zchee/deoplete-jedi', { 'for': 'python' }
-  "Plug 'zchee/deoplete-clang'
   Plug 'Shougo/neco-vim', { 'for': 'vim' }
   Plug 'Shougo/neoinclude.vim'
-  "Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
 endif
 " Initialize plugin system

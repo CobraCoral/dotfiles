@@ -6,17 +6,17 @@
         "name": "player",
 				"args": {
           "state_symbols": {"fallback": " ", "pause": "⏸ ", "stop": "⏹ ", "play": "🎵 "},
-          "format": "{state_symbol}{artist:^10}🎶{title:^30} "
+          "format": "{state_symbol} 𝄢 {artist} 𝄞 {title} 🎶 ({total})"
 				},
-         "priority": 10
+         "priority": 90
       },
 	  {
 		  "function": "mysegments.getstudyschedule.study_schedule",
-		  "priority": 50
+		  "priority": 30
 	  },
 	  {
 		  "function": "mysegments.gitcheck.gitcheck",
-		  "priority": 30
+		  "priority": 20
 	  },
 	  {
 		  "function": "mysegments.vpncheck.vpncheck",
@@ -30,7 +30,15 @@
 			},
 			{
 				"function": "powerline.segments.common.bat.battery",
-				"priority": 90
+				"priority": 20
+			},
+			{
+				"function": "powerline.segments.common.net.network_load",
+				"priority": 80
+			},
+			{
+				"function": "powerline.segments.common.sys.system_load",
+				"priority": 80
 			},
 			{
 				"function": "powerline.segments.common.time.date",
@@ -43,7 +51,7 @@
 					"format": "%H:%M",
 					"istime": true
 				},
-				"priority": 20
+				"priority": 70
 			},
 			{
 				"function": "powerline.segments.common.net.hostname",
