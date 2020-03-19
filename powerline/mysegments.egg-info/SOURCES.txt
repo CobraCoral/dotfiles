@@ -3,6 +3,9 @@ setup.py
 mysegments/__init__.py
 mysegments/getstudyschedule.py
 mysegments/gitcheck.py
+mysegments/mousebattery.py
+mysegments/t.py
+mysegments/upower.py
 mysegments/vpncheck.py
 mysegments.egg-info/PKG-INFO
 mysegments.egg-info/SOURCES.txt

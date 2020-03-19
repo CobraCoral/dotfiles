@@ -6,7 +6,7 @@
         "name": "player",
 				"args": {
           "state_symbols": {"fallback": " ", "pause": "⏸ ", "stop": "⏹ ", "play": "🎵 "},
-          "format": "{state_symbol}{artist:^10}🎶{title:^30} "
+          "format": "{state_symbol}{artist:^15}🎶{title:^30} "
 				},
          "priority": 10
       },
@@ -24,13 +24,23 @@
 	  }
     ],
 		"right": [
+	        {
+	            "function": "mysegments.mousebattery.mousebatterycheck",
+	            "priority": 20,
+				"args": {
+                    "format": "🐁⚡{capacity:3.0%}"
+				}
+	        },
 			{
 				"function": "powerline.segments.common.wthr.weather",
 				"priority": 10
 			},
 			{
 				"function": "powerline.segments.common.bat.battery",
-				"priority": 90
+				"priority": 90,
+				"args": {
+                    "format": "{ac_state}{capacity:3.0%}"
+				}
 			},
 			{
 				"function": "powerline.segments.common.time.date",
@@ -44,10 +54,6 @@
 					"istime": true
 				},
 				"priority": 20
-			},
-			{
-				"function": "powerline.segments.common.net.hostname",
-				"priority": 100
 			}
 		]
 	}

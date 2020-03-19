@@ -55,7 +55,7 @@
 				"full_heart": "♥",
 				"empty_heart": "♥",
 				"online": "⚡︎",
-				"offline": " "
+				"offline": "🔌"
 			}
 		},
 		"powerline.segments.common.sys.uptime": {
