@@ -15,3 +15,5 @@ alias lsmem='ps aux --sort=-%mem | awk "NR<=20{print \$0}" '
 # directory navigation
 alias pd='dirs -l -v'
 
+alias cl='clang++ -fdiagnostics-color=always '
+alias l='less --quit-if-one-screen '
