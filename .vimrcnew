@@ -22,25 +22,16 @@ else
 endif
 execute 'source '.expand('~/.config/nvim/env.vim')
 "}}}
-if !has('win32')
-  let g:startify_bookmarks = [
-        \ {'R': '~/repo/'},
-        \ {'r': '~/repo/notes'},
-        \ {'r': '~/repo/dotfiles'},
-        \ {'r': '~/repo/scripts'},
-        \ {'P': '~/playground/'},
-        \ {'c': '~/.config/nvim/init.vim'},
-        \ {'c': '~/.zshrc'},
-        \ {'c': '~/.tmux.conf'}
-        \ ]
-else
-  let g:startify_bookmarks = [
-        \ {'R': '~/repo/'},
-        \ {'P': '~/playground/'},
-        \ {'c': '~/AppData/Local/nvim/init.vim'},
-        \ {'c': '~/Documents/WindowsPowerShell/Profile.ps1'}
-        \ ]
-endif
+let g:startify_bookmarks = [
+      \ {'R': '~/work/'},
+      \ {'r': '~/work/source'},
+      \ {'r': '~/work/dotfiles'},
+      \ {'r': '~/work/source/python'},
+      \ {'P': '~/playground/'},
+      \ {'c': '~/.config/nvim/init.vim'},
+      \ {'c': '~/.zshrc'},
+      \ {'c': '~/.tmux.conf'}
+      \ ]
 "}}}
 "{{{Global
 "{{{Function
@@ -76,7 +67,7 @@ function! ForceCloseRecursively()
 endfunction
 "}}}
 "{{{s:go_indent
-" gi, gI跳转indent
+" gi, gI indent
 function! s:indent_len(str)
   return type(a:str) == 1 ? len(matchstr(a:str, '^\s*')) : 0
 endfunction
@@ -123,26 +114,26 @@ set number cursorline
 set mouse=a
 filetype plugin indent on
 set t_Co=256
-syntax enable                           " 开启语法支持
-set termguicolors                       " 开启GUI颜色支持
-set smartindent                         " 智能缩进
-set hlsearch                            " 高亮搜索
-set undofile                            " 始终保留undo文件
-set undodir=$HOME/.cache/vim/undo       " 设置undo文件的目录
-set timeoutlen=500                      " 超时时间为 0.5 秒
-set foldmethod=marker                   " 折叠方式为按照marker折叠
-set hidden                              " buffer自动隐藏
-set showtabline=2                       " 总是显示标签
-set scrolloff=5                         " 保持5行
-set viminfo='1000                       " 文件历史个数
-set autoindent                          " 自动对齐
+syntax enable
+set termguicolors
+set smartindent
+set hlsearch
+set undofile
+set undodir=$HOME/.cache/vim/undo
+set timeoutlen=500
+set foldmethod=marker
+set hidden
+set showtabline=2
+set scrolloff=5
+set viminfo='1000
+set autoindent
 set wildcharm=<C-Z>
 cnoremap <expr> <up> wildmenumode() ? "\<left>" : "\<up>"
 cnoremap <expr> <down> wildmenumode() ? "\<right>" : "\<down>"
 cnoremap <expr> <left> wildmenumode() ? "\<up>" : "\<left>"
 cnoremap <expr> <right> wildmenumode() ? " \<bs>\<C-Z>" : "\<right>"
-set wildmenu                            " 命令框Tab呼出菜单
-set autoread                            " 自动加载变更文件
+set wildmenu
+set autoread
 set tabstop=4      " one tab == four spaces
 set softtabstop=4  " one tab == four spaces
 set expandtab      " spaces instead of tabs
@@ -201,123 +192,119 @@ if !has('nvim')
 endif
 "}}}
 "{{{NormalMode
-" Alt+X进入普通模式
+" buffer navigation
+:nnoremap <C-n> :bnext<CR>       " CTRL-n for next buffer
+:nnoremap <C-p> :bprevious<CR>   " CTRL-n for next buffer
+" Alt+X
 nnoremap <A-x> <ESC>
 if !has('nvim')
   nnoremap ^@ <ESC>
 else
   nnoremap <silent> <C-l> :<C-u>wincmd p<CR>
 endif
-" ; 绑定到 :
+" ; :
 nnoremap ; :
-" q 绑定到:q
+" q :q
 nnoremap <silent> q :q<CR>
-" Q 绑定到:q!
+" Q :q!
 nnoremap <silent> Q :q!<CR>
-" <leader>q 关闭 quickfix list
+" <leader>q quickfix list
 nnoremap <silent> <leader>q :cclose<CR>
-" Ctrl+S保存文件
+" Ctrl+S
 nnoremap <C-S> :<C-u>w<CR>
-"" Shift+HJKL快速移动
+"" Shift+HJKL
 "nnoremap K 7<up>
 "nnoremap J 7<down>
 "nnoremap H 0
 "nnoremap L $
-" Shift加方向键加速移动
+" Shift
 nnoremap <S-up> <Esc>7<up>
 nnoremap <S-down> <Esc>7<down>
 nnoremap <S-left> <Esc>0
 nnoremap <S-right> <Esc>$
-" x删除字符但不保存到剪切板
+" x
 nnoremap x "_x
-" Ctrl+X剪切当前行但不保存到剪切板
+" Ctrl+X
 nnoremap <C-X> <ESC>"_dd
-" <leader>+Y复制到系统剪切板
+" <leader>+Y
 nnoremap <leader>y "+y
-" <leader>+P从系统剪切板粘贴
+" <leader>+P
 nnoremap <leader>p "+p
-" Alt+T新建tab
+" Alt+T tab
 nnoremap <silent> <A-t> :<C-u>tabnew<CR>:call ExplorerStartify()<CR>
-" Alt+W关闭当前标签
+" Alt+W
 nnoremap <silent> <A-w> :<C-u>call CloseOnLastTab()<CR>
-" Alt+上下左右可以跳转和移动窗口
-if !has('win32')
-  nnoremap <A-left> <Esc>gT
-  nnoremap <A-right> <Esc>gt
-  nnoremap <silent> <A-up> :<C-u>tabm -1<CR>
-  nnoremap <silent> <A-down> :<C-u>tabm +1<CR>
-else
-  nnoremap <C-left> <Esc>gT
-  nnoremap <C-right> <Esc>gt
-  nnoremap <silent> <C-up> :<C-u>tabm -1<CR>
-  nnoremap <silent> <C-down> :<C-u>tabm +1<CR>
-endif
-" Alt+h j k l可以在窗口之间跳转
+" Alt+
+nnoremap <A-left> <Esc>gT
+nnoremap <A-right> <Esc>gt
+nnoremap <silent> <A-up> :<C-u>tabm -1<CR>
+nnoremap <silent> <A-down> :<C-u>tabm +1<CR>
+" Alt+h j k l
 nnoremap <silent> <A-h> :<C-u>wincmd h<CR>
 nnoremap <silent> <A-l> :<C-u>wincmd l<CR>
 nnoremap <silent> <A-k> :<C-u>wincmd k<CR>
 nnoremap <silent> <A-j> :<C-u>wincmd j<CR>
-" Alt+V && Alt+S新建窗口
+" Alt+V && Alt+S
 nnoremap <silent> <A-v> :<C-u>vsp<CR>
 nnoremap <silent> <A-s> :<C-u>sp<CR>
-" neovim下，Alt+Shift+V, Alt+Shift+S分别切换到垂直和水平分割
+" neovim, Alt+Shift+V, Alt+Shift+S
 if has('nvim')
   nnoremap <silent> <A-V> :<C-u>wincmd t<CR>:wincmd H<CR>
   nnoremap <silent> <A-S> :<C-u>wincmd t<CR>:wincmd K<CR>
 endif
-" Alt+-<>调整窗口大小
+" Alt+-<>
 nnoremap <silent> <A-=> :<C-u>wincmd +<CR>
 nnoremap <silent> <A--> :<C-u>wincmd -<CR>
 nnoremap <silent> <A-,> :<C-u>wincmd <<CR>
 nnoremap <silent> <A-.> :<C-u>wincmd ><CR>
-" z+方向键快速跳转
+" z+
 nnoremap z<left> zk
 nnoremap z<right> zj
 nnoremap z<up> [z
 nnoremap z<down> ]z
-" z+hjkl快速跳转
+" z+hjkl
 nnoremap zh zk
 nnoremap zl zj
 nnoremap zj ]z
 nnoremap zk [z
-" zo递归局部打开折叠，zc递归局部关闭折叠
+" zo, zc
 nnoremap zo zO
 nnoremap zc zC
-" zO递归全局打开折叠，C递归全局关闭折叠
+" zO, C
 nnoremap zO zR
 nnoremap zC zM
-" zf创建新的折叠，zd删除当前折叠
+" zf, zd
 nnoremap zf zf
 nnoremap zd zd
-" zn创建新的折叠，并yard当前行的内容
+" zn, yard
 nmap zn $vbda<Space><CR><Space><CR><Space><ESC>v<up><up>zfa<Backspace><down><right><Backspace><down><right><Backspace><up><up><Esc>A
-" zs保存折叠视图，zl加载折叠视图
+" zs, zl
 nnoremap zs :<C-u>mkview<CR>
 nnoremap zl :<C-u>loadview<CR>
 "}}}
 "{{{InsertMode
-" Alt+X进入普通模式
+" Alt+X
 inoremap <A-x> <ESC><right>
 if !has('nvim')
   inoremap ^@ <ESC>
 endif
-" Ctrl+V粘贴
+" Ctrl+V
 inoremap <C-V> <Space><Backspace><ESC>pa
-" <A-z><C-v>从系统剪切板粘贴
+" <A-z><C-v>
 inoremap <A-z><C-V> <Space><Backspace><ESC>"+pa
-" Ctrl+S保存文件
+" Ctrl+S
 inoremap <C-S> <Esc>:w<CR>a
-" Ctrl+O跳转
+" Ctrl+O
 inoremap <C-o> <Esc><C-o>i
-" Ctrl+Z撤销上一个动作
-" Ctrl+R撤销撤销的动作
+" Ctrl+Z
+" Ctrl+R
 inoremap <C-R> <ESC><C-R>i
-" Ctrl+X剪切当前行但不保存到剪切板
+" Ctrl+X
 inoremap <C-X> <ESC>"_ddi
-" Ctrl+hjkl移动
+" Ctrl+hjkl
 inoremap <C-h> <left>
 inoremap <C-l> <right>
-" Shift加方向键加速移动
+" Shift
 inoremap <S-up> <up><up><up><up><up>
 inoremap <S-down> <down><down><down><down><down>
 inoremap <S-left> <ESC>I
@@ -326,68 +313,61 @@ inoremap <S-right> <ESC>A
 inoremap <C-e> <ESC>ea
 inoremap <C-w> <ESC>lwi
 inoremap <C-b> <ESC>lbi
-" Alt+上下左右可以跳转和移动窗口
-if !has('win32')
-  inoremap <silent> <A-left> <Esc>:wincmd h<CR>i
-  inoremap <silent> <A-right> <Esc>:wincmd l<CR>i
-  inoremap <silent> <A-up> <Esc>:tabm -1<CR>i
-  inoremap <silent> <A-down> <Esc>:tabm +1<CR>i
-else
-  inoremap <silent> <C-left> <Esc>:wincmd h<CR>i
-  inoremap <silent> <C-right> <Esc>:wincmd l<CR>i
-  inoremap <silent> <C-up> <Esc>:tabm -1<CR>i
-  inoremap <silent> <C-down> <Esc>:tabm +1<CR>i
-endif
+" Alt+
+inoremap <silent> <A-left> <Esc>:wincmd h<CR>i
+inoremap <silent> <A-right> <Esc>:wincmd l<CR>i
+inoremap <silent> <A-up> <Esc>:tabm -1<CR>i
+inoremap <silent> <A-down> <Esc>:tabm +1<CR>i
 "}}}
 "{{{VisualMode
-" Alt+X进入普通模式
+" Alt+X
 vnoremap <A-x> <ESC>
 snoremap <A-x> <ESC>
 if !has('nvim')
   vnoremap ^@ <ESC>
 endif
-" ; 绑定到 :
+" ; :
 vnoremap ; :
-" Ctrl+S保存文件
+" Ctrl+S
 vnoremap <C-S> :<C-u>w<CR>v
-" x删除字符但不保存到剪切板
+" x
 vnoremap x "_x
-" Shift+方向键快速移动
+" Shift+
 vnoremap <S-up> <up><up><up><up><up>
 vnoremap <S-down> <down><down><down><down><down>
 vnoremap <S-left> 0
 vnoremap <S-right> $<left>
-"" Shift+HJKL快速移动
+"" Shift+HJKL
 "vnoremap K 5<up>
 "vnoremap J 5<down>
 "vnoremap H 0
 "vnoremap L $
-" <leader>+Y复制到系统剪切板
+" <leader>+Y
 vnoremap <leader>y "+y
-" <leader>+P从系统剪切板粘贴
+" <leader>+P
 vnoremap <leader>p "+p
 "}}}
 "{{{CommandMode
-" Alt+X进入普通模式
+" Alt+X
 cmap <A-x> <ESC>
 if !has('nvim')
   cmap ^@ <ESC>
 endif
-" Ctrl+S保存
+" Ctrl+S
 cmap <C-S> :<C-u>w<CR>
 "}}}
 "{{{TerminalMode
 if has('nvim')
-  " Alt+X进入普通模式
+  " Alt+X
   tnoremap <A-x> <C-\><C-n>
-  " Shift+方向键加速移动
+  " Shift+
   tnoremap <S-left> <C-a>
   tnoremap <S-right> <C-e>
 endif
 "}}}
 "}}}
 "{{{Command
-" Q强制退出
+" Q
 command Q q!
 " {{{PasteBin
 function PasteBin() range
@@ -559,11 +539,7 @@ Plug 'wellle/tmux-complete.vim', { 'for': 'tmux' }
 Plug 'tjdevries/coc-zsh'
 Plug 'neoclide/coc.nvim', { 'branch': 'release', 'do': { -> coc#util#install()} }
 Plug 'dense-analysis/ale'
-if !has('win32')
-  Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
-else
-  Plug 'Yggdroot/LeaderF', { 'do': '.\install.bat' }
-endif
+Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
 Plug 'justinmk/vim-sneak'
 Plug 'mbbill/undotree'
 Plug 'tpope/vim-fugitive'
@@ -586,7 +562,7 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'skywind3000/asynctasks.vim'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'skywind3000/vim-terminal-help'
-Plug 'mg979/vim-visual-multi'
+" Plug 'mg979/vim-visual-multi'
 Plug 'lambdalisue/suda.vim'
 Plug 'tpope/vim-surround'
 Plug 'AndrewRadev/inline_edit.vim'
@@ -608,7 +584,6 @@ Plug 'elzr/vim-json', { 'for': 'json' }
       \| au BufNewFile,BufRead *.json call Func_vim_json()
 Plug 'masukomi/vim-markdown-folding'
 Plug 'KabbAmine/vCoolor.vim'
-Plug 'yianwillis/vimcdoc'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & npm install' }
 "{{{
 call plug#end()
@@ -937,16 +912,17 @@ if g:vimEnableStartify == 1
           \ ]
   endif
   " banner
-  let g:startify_custom_header = [
-        \ "  ____    ____     _____      __  __  ______                                          ",
-        \ " /\\  _`\\ /\\  _`\\  /\\___ \\    /\\ \\/\\ \\/\\__  _\\   /'\\_/`\\                 ",
-        \ " \\ \\ \\L\\_\\ \\ \\/\\_\\\\/__/\\ \\   \\ \\ \\ \\ \\/_/\\ \\/  /\\      \\         ",
-        \ "  \\ \\  _\\/\\ \\ \\/_/_  _\\ \\ \\   \\ \\ \\ \\ \\ \\ \\ \\  \\ \\ \\__\\ \\       ",
-        \ "   \\ \\ \\/  \\ \\ \\L\\ \\/\\ \\_\\ \\   \\ \\ \\_/ \\ \\_\\ \\__\\ \\ \\_/\\ \\    ",
-        \ "    \\ \\_\\   \\ \\____/\\ \\____/    \\ `\\___/ /\\_____\\\\ \\_\\\\ \\_\\          ",
-        \ "     \\/_/    \\/___/  \\/___/      `\\/__/  \\/_____/ \\/_/ \\/_/                    ",
-        \ ]
-  " costom startify list
+   let g:startify_custom_header = 'startify#pad(startify#fortune#cowsay())'
+  "let g:startify_custom_header = [
+  "      \ "  ____    ____     _____      __  __  ______                                          ",
+  "      \ " /\\  _`\\ /\\  _`\\  /\\___ \\    /\\ \\/\\ \\/\\__  _\\   /'\\_/`\\                 ",
+  "      \ " \\ \\ \\L\\_\\ \\ \\/\\_\\\\/__/\\ \\   \\ \\ \\ \\ \\/_/\\ \\/  /\\      \\         ",
+  "      \ "  \\ \\  _\\/\\ \\ \\/_/_  _\\ \\ \\   \\ \\ \\ \\ \\ \\ \\ \\  \\ \\ \\__\\ \\       ",
+  "      \ "   \\ \\ \\/  \\ \\ \\L\\ \\/\\ \\_\\ \\   \\ \\ \\_/ \\ \\_\\ \\__\\ \\ \\_/\\ \\    ",
+  "      \ "    \\ \\_\\   \\ \\____/\\ \\____/    \\ `\\___/ /\\_____\\\\ \\_\\\\ \\_\\          ",
+  "      \ "     \\/_/    \\/___/  \\/___/      `\\/__/  \\/_____/ \\/_/ \\/_/                    ",
+  "      \ ]
+  " custom startify list
   let g:startify_lists = [
         \ { 'type': 'sessions',  'header': [" \ue62e Sessions"]       },
         \ { 'type': 'bookmarks', 'header': [" \uf5c2 Bookmarks"]      },
@@ -1029,8 +1005,8 @@ let g:which_key_map["\<space>"]['H'] = 'live color'
 "}}}
 "{{{indentLine
 "{{{indentLine-usage
-" :LeadingSpaceToggle  切换显示Leading Space
-" :IndentLinesToggle  切换显示indentLine
+" :LeadingSpaceToggle  Leading Space
+" :IndentLinesToggle  indentLine
 "}}}
 let g:indentLine_enabled = 1
 let g:indentLine_leadingSpaceEnabled = 0
@@ -1051,7 +1027,7 @@ let g:limelight_default_coefficient = 0.7
 let g:goyo_width = 95
 let g:goyo_height = 85
 let g:goyo_linenr = 0
-"进入goyo模式后自动触发limelight,退出后则关闭
+"goyolimelight,
 augroup goyoCustom
   autocmd! User GoyoEnter Limelight
   autocmd! User GoyoLeave Limelight!
@@ -1062,7 +1038,7 @@ let g:which_key_map["\<space>"]['f'] = 'focus mode'
 let g:which_key_map["\<space>"]['r'] = 'reading mode'
 "}}}
 "{{{golden-ratio
-" 默认关闭
+" 
 let g:golden_ratio_autocommand = 0
 nnoremap <silent> <leader><space>g :<c-u>GoldenRatioResize<cr>
 let g:which_key_map["\<space>"]['g'] = 'resize window'
@@ -1154,10 +1130,10 @@ function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
-inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
-inoremap <silent><expr> <S-TAB> pumvisible() ? "\<C-p>" :
-      \ <SID>check_back_space() ? "\<S-TAB>" :
-      \ coc#refresh()
+" inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+" inoremap <silent><expr> <S-TAB> pumvisible() ? "\<C-p>" :
+"       \ <SID>check_back_space() ? "\<S-TAB>" :
+"       \ coc#refresh()
 imap <expr> <C-z> pumvisible() ? "\<C-e>" : "\<Esc>\u\i"
 imap <expr> <C-c> pumvisible() ? "\<Space>\<Backspace>" : "\<C-c>"
 imap <expr> <CR> pumvisible() ? "\<Space>\<Backspace>\<CR>" : "\<CR>"
@@ -1290,9 +1266,9 @@ source /home/fcavalcanti/work/dotfiles/.coc.vim
 "}}}
 "{{{ale
 "{{{ale-usage
-let g:ALE_MODE = 1  " 0则只在保存文件时检查，1则只在normal模式下检查，2则异步检查
-" 普通模式下<leader>lk和<leader>lj分别跳转到上一个、下一个错误
-" :ALEDetail  查看详细错误信息
+let g:ALE_MODE = 1  " 0，1normal，2
+" <leader>lk<leader>lj、
+" :ALEDetail  
 "}}}
 " ls ~/.local/share/nvim/plugins/ale/ale_linters/
 let g:ale_linters = {
@@ -1309,22 +1285,22 @@ let g:ale_linters = {
       \       'text': ['languagetool'],
       \       'vim': ['vint'],
       \}
-"查看上一个错误
+"
 nnoremap <silent> <leader>lk :ALEPrevious<CR>
-"查看下一个错误
+"
 nnoremap <silent> <leader>lj :ALENext<CR>
-"查看详情
+"
 nnoremap <silent> <leader>li :ALEDetail<CR>
-"自定义error和warning图标
+"errorwarning
 let g:ale_sign_error = "\uf65b"
 let g:ale_sign_warning = "\uf421"
-"防止java在中文系统上警告和提示乱码
+"java
 let g:ale_java_javac_options = '-encoding UTF-8  -J-Duser.language=en'
-"显示Linter名称,出错或警告等相关信息
+"Linter,
 let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
-" 光标移动到错误的地方时立即显示错误
+" 
 let g:ale_echo_delay = 0
 " virtual text
 let g:ale_virtualtext_cursor = 1
@@ -1376,7 +1352,7 @@ let g:Lf_RgConfig = [
       \ '--glob=!\.svn/*',
       \ '--glob=!\.hg/*',
       \ '--case-sensitive',
-      \ has('win32') ? '--crlf' : '--no-crlf',
+      \ '--no-crlf',
       \ '--multiline',
       \ '--hidden'
       \ ]
@@ -2126,7 +2102,7 @@ augroup END
 "{{{neoformat
 "{{{neoformat-usage
 function! Help_neoformat()
-  echo '<leader><Tab>         普通模式和可视模式排版'
+  echo '<leader><Tab>         '
   echo ''
   echo 'Normal Mode Syntax'
   echo ':<C-u>Neoformat python'
@@ -2165,7 +2141,7 @@ vnoremap <silent> <leader><Tab> :Neoformat! &ft<CR>
 "}}}
 "{{{nerdcommenter
 "{{{nerdcommenter-usage
-" <leader>c?  显示帮助
+" <leader>c?  
 function! Help_nerdcommenter()
   echo "[count]<Leader>cc                             NERDComComment, Comment out the current [count] line or text selected in visual mode\n"
   echo "[count]<Leader>cu                             NERDComUncommentLine, Uncomments the selected line(s)\n"
@@ -2244,21 +2220,21 @@ else
 endif
 "}}}
 "}}}
-"{{{vim-visual-multi
-"{{{vim-visual-multi-usage
-function! Help_vim_visual_multi()
-  echo 'Normal & Visual'
-  echo '`             添加光标'
-  echo '<Esc>         退出'
-endfunction
-"}}}
-" https://github.com/mg979/vim-visual-multi/wiki
-let g:VM_default_mappings = 0
-let g:VM_maps = {}
-let g:VM_maps['Switch Mode']                 = 'v'
-let g:VM_maps['Add Cursor At Pos']           = '`'
-let g:VM_maps['Visual Cursors']              = '`'
-"}}}
+" "{{{vim-visual-multi
+" "{{{vim-visual-multi-usage
+" function! Help_vim_visual_multi()
+"   echo 'Normal & Visual'
+"   echo '`             '
+"   echo '<Esc>         '
+" endfunction
+" "}}}
+" " https://github.com/mg979/vim-visual-multi/wiki
+" let g:VM_default_mappings = 0
+" let g:VM_maps = {}
+" let g:VM_maps['Switch Mode']                 = 'v'
+" let g:VM_maps['Add Cursor At Pos']           = '`'
+" let g:VM_maps['Visual Cursors']              = '`'
+" "}}}
 "{{{suda.vim
 "{{{suda.vim-usage
 " :E filename  sudo edit
@@ -2282,7 +2258,7 @@ endfunction
 "{{{inline-edit-usage
 function! Help_inline_edit()
   echo ''
-  echo 'visual 或 normal 模式下按 E'
+  echo 'visual normal E'
   echo ''
 endfunction
 "}}}
@@ -2303,8 +2279,8 @@ hi def link vtmDelimiter        Comment
 "}}}
 "{{{comfortable-motion.vim
 "{{{comfortable-motion.vim-usage
-" <pageup> <pagedown>平滑滚动
-" nvim中，<A-J>和<A-K>平滑滚动
+" <pageup> <pagedown>
+" nvim, A-J><A-K>
 "}}}
 let g:comfortable_motion_no_default_key_mappings = 1
 let g:comfortable_motion_friction = 80.0
@@ -2317,7 +2293,7 @@ nnoremap <silent> <C-u> :<C-u>call comfortable_motion#flick(-120)<CR>
 "{{{auto-pairs
 "{{{auto-pairs-usage
 function! Help_auto_pairs()
-  echo '插入模式下：'
+  echo ':'
   echo '<A-z>p            toggle auto-pairs'
   echo '<A-n>             jump to next closed pair'
   echo '<A-Backspace>     delete without pairs'
@@ -2402,13 +2378,13 @@ nmap <2-LeftMouse> ]%V[%
 if exists('g:vimManPager')
   " {{{vim-manpager-usage
   function! Help_vim_manpager()
-    echo 'shell里"man foo"启动'
-    echo '<CR>              打开当前word的manual page'
-    echo '<C-o>             跳转到之前的位置'
-    echo '<Tab>             跳转到下一个历史'
-    echo '<S-Tab>           跳转到上一个历史'
-    echo '<C-j>             跳转到下一个keyword'
-    echo '<C-k>             跳转到上一个keyword'
+    echo 'shell"man foo"'
+    echo '<CR>              wordmanual page'
+    echo '<C-o>             '
+    echo '<Tab>             '
+    echo '<S-Tab>           '
+    echo '<C-j>             keyword'
+    echo '<C-k>             keyword'
     echo 'E                 set modifiable'
     echo '<A-w>             quit'
     echo '?                 Help'
@@ -2492,12 +2468,13 @@ let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols[''] = "\uf15b"
 let g:WebDevIconsUnicodeDecorateFolderNodes = v:true
 "}}}
 "{{{markdown-preview.nvim
-if !has('win32')
-  let g:mkdp_browser = 'firefox-developer-edition'
-else
-  let g:mkdp_browser = 'firefox'
-endif
+let g:mkdp_browser = 'google-chrome'
 let g:mkdp_echo_preview_url = 1
 nmap <silent> <leader><space>p <Plug>MarkdownPreviewToggle
 let g:which_key_map["\<space>"]['p'] = 'preview markdown'
 "}}}
+
+
+augroup filetype
+  autocmd BufNewFile,BufRead /home/fcavalcanti/work/source/wachovia/framework/CSI/build/* set filetype=make
+augroup END
