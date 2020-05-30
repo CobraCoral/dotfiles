@@ -15,11 +15,6 @@ if executable('tmux') && filereadable(expand('~/.zshrc')) && $TMUX !=# ''
 else
   let g:vimIsInTmux = 0
 endif
-if exists('g:vimManPager')
-  let g:vimEnableStartify = 0
-else
-  let g:vimEnableStartify = 1
-endif
 execute 'source '.expand('~/.config/nvim/env.vim')
 "}}}
 let g:startify_bookmarks = [
@@ -511,6 +506,8 @@ Plug 'sainnhe/edge'
 Plug 'sainnhe/sonokai'
 Plug 'sainnhe/vim-color-forest-night'
 Plug 'rakr/vim-one'
+Plug 'ayu-theme/ayu-vim'
+Plug 'godlygeek/csapprox'
 "}}}
 Plug 'itchyny/lightline.vim'
 Plug 'itchyny/vim-gitbranch'
@@ -520,6 +517,12 @@ Plug 'albertomontesg/lightline-asyncrun'
 Plug 'rmolin88/pomodoro.vim'
 if g:vimIsInTmux == 1
   Plug 'sainnhe/tmuxline.vim', { 'on': [ 'Tmuxline', 'TmuxlineSnapshot' ] }
+endif
+Plug 'lambdalisue/vim-manpager'
+if $IN_MAN
+  let g:vimEnableStartify = 0
+else
+  let g:vimEnableStartify = 1
 endif
 if g:vimEnableStartify == 1
   Plug 'mhinz/vim-startify'
@@ -572,7 +575,6 @@ Plug 'yuttie/comfortable-motion.vim'
 Plug 'mbbill/fencview', { 'on': [ 'FencAutoDetect', 'FencView' ] }
 Plug 'tweekmonster/startuptime.vim', { 'on': 'StartupTime' }
 Plug 'andymass/vim-matchup'
-Plug 'lambdalisue/vim-manpager'
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-sleuth'
 if executable('fcitx')
@@ -872,6 +874,12 @@ let g:colorSchemeList['One'] = [
       \   'colorscheme one',
       \   'call SwitchLightlineColorScheme("one")'
       \   ]
+let g:colorSchemeList['Ayu'] = [
+      \   'set background=dark',
+      \   'let g:ayu_color="dark"',
+      \   'colorscheme ayu',
+      \   'call SwitchLightlineColorScheme("ayu")'
+      \   ]
 "{{{Functions
 function SwitchLightlineColorScheme(lightlineName) abort
   execute join(['source', globpath(&runtimepath, join(['autoload/lightline/colorscheme/', a:lightlineName, '.vim'], ''), 0, 1)[0]], ' ')
@@ -900,7 +908,7 @@ if g:vimEnableStartify == 1
   let g:startify_session_delete_buffers = 1 " delete all buffers when loading or closing a session, ignore unsaved buffers
   let g:startify_change_to_dir = 1 " when opening a file or bookmark, change to its directory
   let g:startify_fortune_use_unicode = 1 " beautiful symbols
-  let g:startify_padding_left = 3 " the number of spaces used for left padding
+  let g:startify_padding_left = 4 " the number of spaces used for left padding
   let g:startify_session_remove_lines = ['setlocal', 'winheight'] " lines matching any of the patterns in this list, will be removed from the session file
   let g:startify_session_sort = 1 " sort sessions by alphabet or modification time
   let g:startify_custom_indices = ['1', '2', '3', '4', '5', '1', '2', '3', '4', '5'] " MRU indices

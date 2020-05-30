@@ -93,3 +93,7 @@ export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
 # Set fzf installation directory path
 #export FZF_BASE=/usr/bin
 
+# https://github.com/neovim/neovim/issues/9120
+#export MANPAGER='nvim -u NORC +Man!'
+# https://github.com/lambdalisue/vim-manpager
+export MANPAGER='vim -c MANPAGER - IN_MAN=1'

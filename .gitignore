@@ -8,3 +8,4 @@
 **.p
 ngrok
 .vim/sessions/*
+.vim/.netrwhist

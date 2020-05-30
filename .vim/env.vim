@@ -1,7 +1,16 @@
 let g:vimAutoInstall = 1
 let g:lightlineArtify = 1
-"let g:vimColorScheme = 'Gruvbox Material Light'
-"let g:vimColorScheme = 'Gruvbox Material Dark'
-let g:vimColorScheme = 'One'
-let g:python3_host_prog = '/usr/bin/python3'
 set helplang=us
+"let g:vimColorScheme='Edge Dark'
+"let g:vimColorScheme='Edge Light'
+"let g:vimColorScheme='Sonokai Shusia'
+"let g:vimColorScheme='Sonokai Andromeda'
+"let g:vimColorScheme='Sonokai Atlantis'
+"let g:vimColorScheme='Sonokai Maia'
+"let g:vimColorScheme='Gruvbox Material Light'
+"let g:vimColorScheme='Gruvbox Material Dark'
+" For macOS
+"let g:vimColorScheme='Forest Night'
+" Preferred for laptop
+let g:vimColorScheme='One'
+let g:vimColorScheme='Ayu'
